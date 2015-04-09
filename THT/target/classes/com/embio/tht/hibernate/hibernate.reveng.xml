@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+<type-mapping>
+	<sql-type jdbc-type="NUMERIC" hibernate-type="int" precision="22"
+		not-null="true">
+	</sql-type>
+	<sql-type jdbc-type="VARCHAR" hibernate-type="java.lang.String" length="20"
+		not-null="false">
+	</sql-type>
+	<sql-type jdbc-type="FLOAT" hibernate-type="java.lang.Double"
+		precision="126" not-null="false">
+	</sql-type>
+</type-mapping>
+
+
+<table-filter match-schema="ORACLE_USER1" match-name="ACCOUNT_INFO" />
+	<table-filter match-schema="ORACLE_USER1" match-name="ALLERGY" />
+	<table-filter match-schema="ORACLE_USER1" match-name="CALORIE" />
+	<table-filter match-schema="ORACLE_USER1" match-name="CARDS" />
+	<table-filter match-schema="ORACLE_USER1" match-name="CART_ITEM" />
+	<table-filter match-schema="ORACLE_USER1"
+		match-name="CART_ITEM_UNIT" />
+	<table-filter match-schema="ORACLE_USER1" match-name="DISH" />
+	<table-filter match-schema="ORACLE_USER1"
+		match-name="DISH_INGREDIENT_ITEM" />
+	<table-filter match-schema="ORACLE_USER1"
+		match-name="EATING_HABBIT" />
+	<table-filter match-schema="ORACLE_USER1" match-name="FINANCE_ITEM" />
+	<table-filter match-schema="ORACLE_USER1" match-name="INGREDIENT" />
+	<table-filter match-schema="ORACLE_USER1" match-name="LOCATION" />
+	<table-filter match-schema="ORACLE_USER1" match-name="ORDER_INFO" />
+	<table-filter match-schema="ORACLE_USER1" match-name="ORDER_ITEM" />
+	<table-filter match-schema="ORACLE_USER1"
+		match-name="ORDER_ITEM_DISH" />
+	<table-filter match-schema="ORACLE_USER1" match-name="PAYMENT" />
+	<table-filter match-schema="ORACLE_USER1" match-name="ROLE" />
+	<table-filter match-schema="ORACLE_USER1" match-name="SURVEY" />
+	<table-filter match-schema="ORACLE_USER1" match-name="SYSTEM_INFO" />
+	<table-filter match-schema="ORACLE_USER1" match-name="TICKET" />
+	<table-filter match-schema="ORACLE_USER1" match-name="USER_INFO" />
+	<table schema="ORACLE_USER1" name="ACCOUNT_INFO">
+		<column name="ID"></column>
+		<column name="USER_ID"></column>
+		<column name="STATUS"></column>
+		<column name="ROLE_ID"></column>
+		<column name="ACCOUNT_NAME"></column>
+		<column name="PASSWORD"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="SURVEY">
+		<column name="ID"></column>
+		<column name="CUSTOMER_ID"></column>
+		<column name="BUDGET_MIN"></column>
+		<column name="BUDGET_MAX"></column>
+		<column name="TRENT"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="CART_ITEM_UNIT">
+		<column name="ID"></column>
+		<column name="DISH_ID"></column>
+		<column name="QUANTITY"></column>
+		<column name="CART_ITEM_ID"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="USER_INFO">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+		<column name="AGE"></column>
+		<column name="LOCATION_ID"></column>
+		<column name="GENDER"></column>
+		<column name="ADDRESS"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="CALORIE">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+		<column name="CALORIE"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="CARDS">
+		<column name="ID"></column>
+		<column name="CARD_ID"></column>
+		<column name="EXPIRE_DATE"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="CART_ITEM">
+		<column name="ID"></column>
+		<column name="RESTAURANT_ID"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="TICKET">
+		<column name="ID"></column>
+		<column name="CODE"></column>
+		<column name="EXPIREDATE"></column>
+		<column name="ORDER_ID"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="DISH">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+		<column name="PRICE"></column>
+		<column name="IMAGE"></column>
+		<column name="RESTAURANT_ID"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="ROLE">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="ORDER_INFO">
+		<column name="ID"></column>
+		<column name="RESTAURANT_ID"></column>
+		<column name="CUSTOMER_ID"></column>
+		<column name="TIME_STAMP"></column>
+		<column name="COMSUME_TIME"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="INGREDIENT">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="PAYMENT">
+		<column name="ID"></column>
+		<column name="BALANCE"></column>
+		<column name="STATUS"></column>
+		<column name="ORDER_ID"></column>
+		<column name="DISCOUNT"></column>
+		<column name="IS_ONLINE"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="FINANCE_ITEM">
+		<column name="ID"></column>
+		<column name="INCOME"></column>
+		<column name="OUTCOME"></column>
+		<column name="ORDER_ID"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="EATING_HABBIT">
+		<column name="ID"></column>
+		<column name="ACCOUNT_ID"></column>
+		<column name="INGREDIENT_ID"></column>
+		<column name="SURVEY_ID"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="LOCATION">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="ORDER_ITEM">
+		<column name="ID"></column>
+		<column name="QUANTITY"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="SYSTEM_INFO">
+		<column name="ID"></column>
+		<column name="DISCOUNT"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="DISH_INGREDIENT_ITEM">
+		<column name="ID"></column>
+		<column name="INGREDIENT_ID"></column>
+		<column name="AMOUNT"></column>
+		<column name="DISH_ID"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="ALLERGY">
+		<column name="ID"></column>
+		<column name="ACCOUNT_ID"></column>
+		<column name="INGREDIENT_ID"></column>
+		<column name="SURVEY_ID"></column>
+	</table>
+	<table schema="ORACLE_USER1" name="ORDER_ITEM_DISH">
+		<column name="ID"></column>
+		<column name="ORDER_ITEM_ID"></column>
+		<column name="DISH_ID"></column>
+	</table>
+</hibernate-reverse-engineering>

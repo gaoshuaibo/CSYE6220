@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+
+
+	<table-filter match-schema="ORACLE_USER1" match-name="RESTAURANT" />
+	<table schema="ORACLE_USER1" name="RESTAURANT">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+		<column name="LOCATION_ID"></column>
+		<column name="ADDRESS"></column>
+		<column name="ACCOUNT_ID"></column>
+	</table>
+</hibernate-reverse-engineering>

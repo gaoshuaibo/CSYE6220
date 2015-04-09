@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="tht_hibernate_session_factory">
+  <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+  <property name="hibernate.connection.password">oracle_user1</property>
+  <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:orcl</property>
+  <property name="hibernate.connection.username">oracle_user1</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+<!--   <property name="hibernate.tht_hibernate_session_factory">com.factory.HibernateSessionFactory</property>  -->
+	<mapping resource="com/embio/tht/beans/AccountInfo.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Allergy.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Calorie.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Cards.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/CartItem.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/CartItemUnit.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Dish.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/DishIngredientItem.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/EatingHabbit.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/FinanceItem.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Ingredient.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Location.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/OrderInfo.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/OrderItem.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/OrderItemDish.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Payment.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Role.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Survey.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/SystemInfo.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Ticket.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/UserInfo.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Restaurant.hbm.xml"/>
+ </session-factory>
+</hibernate-configuration>
