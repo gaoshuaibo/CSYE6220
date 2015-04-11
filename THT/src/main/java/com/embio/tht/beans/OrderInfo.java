@@ -1,4 +1,7 @@
 package com.embio.tht.beans;
+
+import java.util.ArrayList;
+import java.util.List;
 // Generated Apr 6, 2015 10:54:41 PM by Hibernate Tools 3.4.0.CR1
 
 /**
@@ -10,6 +13,9 @@ public class OrderInfo implements java.io.Serializable {
 	private Integer customerId;
 	private String timeStamp;
 
+	private ArrayList<OrderItem> items = new ArrayList<OrderItem>();
+	public ArrayList<OrderItem> getItems(){return this.items;}
+	
 	public OrderInfo() {
 	}
 

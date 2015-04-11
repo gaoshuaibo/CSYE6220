@@ -1,4 +1,7 @@
 package com.embio.tht.beans;
+
+import java.util.ArrayList;
+import java.util.List;
 // Generated Apr 6, 2015 10:54:41 PM by Hibernate Tools 3.4.0.CR1
 
 
@@ -13,8 +16,14 @@ public class Dish implements java.io.Serializable {
 	private Double price;
 	private String image;
 	private Integer restaurantId;
-
 	
+	private Restaurant restaurant;
+	public Restaurant getRestaurant(){return this.restaurant;}
+	public void setRestaurant(Restaurant restaurant){this.restaurant = restaurant;}
+
+	private List<DishIngredientItem> ingredients = new ArrayList<DishIngredientItem>();
+	public List<DishIngredientItem> getIngredients(){return this.ingredients;}
+	public void setIngredients(List<DishIngredientItem> ingredients){this.ingredients = ingredients;}
 	
 	public Dish() {
 	}
@@ -72,4 +81,11 @@ public class Dish implements java.io.Serializable {
 		this.restaurantId = restaurantId;
 	}
 
+	public Integer getCalorie(){
+		Integer calorie = 0;
+		for(DishIngredientItem dii:ingredients){
+			calorie += dii.getAmount()*dii.getIngredient().getCalorie();
+		}
+		return calorie;
+	}
 }

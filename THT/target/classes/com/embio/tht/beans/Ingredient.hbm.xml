@@ -13,5 +13,8 @@
         <property name="name" type="java.lang.String">
             <column name="NAME" length="40" not-null="true" />
         </property>
+        <property name="calorie" type="java.lang.Integer">
+            <column name="CALORIE" precision="22" scale="0" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -7,7 +7,12 @@
 <body>
 	<div id="page_1">
 		<div id="content_1">
-			<form action="login" method="POST" name="login">
+		<c:if test="${go_to_welcome == null}">
+			<form action="/tht/account/login/${role}" method="POST" name="login">
+		</c:if>
+		<c:if test="${go_to_welcome != null}">
+			<form action="/tht/account/login/${role}?go_to_welcome=${go_to_welcome}" method="POST" name="login">
+		</c:if>
 			<label for="name">Name</label>
 			<input type="text" name="username">
 			<label for="password">Password</label>

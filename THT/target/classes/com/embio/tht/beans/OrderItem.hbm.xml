@@ -13,8 +13,8 @@
         <property name="quantity" type="java.lang.Integer">
             <column name="QUANTITY" precision="22" scale="0" />
         </property>
-        <property name="orderId" type="java.lang.Integer">
-            <column name="ORDER_ID" precision="22" scale="0" not-null="true" />
+        <property name="orderInfoId" type="java.lang.Integer">
+            <column name="ORDER_INFO_ID" precision="22" scale="0" not-null="true" />
         </property>
         <property name="restaurantId" type="java.lang.Integer">
             <column name="RESTAURANT_ID" precision="22" scale="0" not-null="true" />

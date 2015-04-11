@@ -10,11 +10,19 @@ public class OrderItem implements java.io.Serializable {
 
 	private Integer id;
 	private Integer quantity;
-	private Integer orderId;
+	private Integer orderInfoId;
 	private Integer restaurantId;
 	private Integer dishId;
 	private String consumeTime;
 
+	private Dish dish;
+	public Dish getDish(){return this.dish;}
+	public void setDish(Dish dish){this.dish = dish;}
+	
+	private Ticket ticket;
+	public Ticket getTicket(){return this.ticket;}
+	public void setTicket(Ticket ticket){this.ticket = ticket;}
+	
 	public OrderItem() {
 	}
 
@@ -55,12 +63,12 @@ public class OrderItem implements java.io.Serializable {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public Integer getOrderId() {
-		return this.orderId;
+	public Integer getOrderInfoId() {
+		return this.orderInfoId;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOrderInfoId(int orderInfoId) {
+		this.orderInfoId = orderInfoId;
 	}
 	
 	public String getConsumeTime() {

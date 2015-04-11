@@ -8,7 +8,16 @@ public class Ingredient implements java.io.Serializable {
 
 	private Integer id;
 	private String name;
+	private Integer calorie;
 
+	public Integer getCalorie() {
+		return this.calorie;
+	}
+
+	public void setCalorie(Integer calorie) {
+		this.calorie = calorie;
+	}
+	
 	public Ingredient() {
 	}
 

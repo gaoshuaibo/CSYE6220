@@ -1,5 +1,6 @@
 package com.embio.tht.controller;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.embio.tht.beans.*;
 import com.embio.tht.common.Checker;
+import com.embio.tht.common.ModelFactory;
 /**
  * Handles requests for the application home page.
  */
@@ -27,39 +29,69 @@ public class CartController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String cart(
-			@RequestParam(value="userid") String _userid,
-			Locale locale, 
+			@RequestParam(value="userid") Integer _userid,
+			Model model) {
+		
+		UserInfo ui = Checker.isUserLoggedIn(_userid);
+		if(ui == null) return "redirect:/account/login/user";
+		model.addAttribute("user", ui);
+
+		CartItemUnit ciu = new CartItemUnit();
+		ciu.setUserInfoId(ui.getId());
+		ciu.setPlaced(0);
+		CartItemUnitHome ciudao = new CartItemUnitHome();
+		List<CartItemUnit> temps = ciudao.findByExample(ciu);
+		List<CartItemUnit> items = new ArrayList<CartItemUnit>();
+		
+		for(CartItemUnit temp:temps){
+			items.add(ModelFactory.getCartItemUnit(temp.getId()));
+		}
+		
+		model.addAttribute("cart_items", items );
+		
+		return "view_user_cart";
+	}
+	
+	@RequestMapping(value="/remove", method = RequestMethod.POST)
+	public String remove(
+			@RequestParam(value="userid") Integer _userid,
+			@RequestParam(value="itemid") Integer _itemid,
+			Model model) {
+			UserInfo ui = Checker.isUserLoggedIn(_userid);
+			
+			CartItemUnitHome ciudao = new CartItemUnitHome();
+			CartItemUnit ciu = ciudao.findById(_itemid);
+			ciudao.delete(ciu);
+
+		return "redirect:/cart?userid=" + _userid;
+	}
+	
+	@RequestMapping(value="/add", method = RequestMethod.POST)
+	public String addToCart(
+			@RequestParam(value="userid", required=false) String _userid,
+			@RequestParam(value="dishid") Integer _dishid,
+			@RequestParam(value="restaurantid") Integer _restaurantid,
+			Integer quantity,
 			Model model) {
 		if(_userid == null){
-			return "login";
+			return "redirect:/account/login/user";
 		}
 		
 		int userid = Integer.parseInt(_userid);
 		UserInfo ui = Checker.isUserLoggedIn(userid);
 		
-		if(ui == null) return "login";
-		model.addAttribute("user", ui);
-
+		if(ui == null) return "redirect:/account/login/user";
+		
 		CartItemUnit ciu = new CartItemUnit();
+		ciu.setDishId(_dishid);
+		ciu.setQuantity(quantity);
+		ciu.setRestaurantId(_restaurantid);
 		ciu.setUserInfoId(ui.getId());
+		ciu.setPlaced(0);
+		
 		CartItemUnitHome ciudao = new CartItemUnitHome();
-		List<CartItemUnit> items = ciudao.findByExample(ciu);
+		ciudao.persist(ciu);
 		
-		
-		for(CartItemUnit item:items){
-			DishHome ddao = new DishHome();
-			Dish dish = ddao.findById(item.getDishId());
-			item.setDish(dish);
-		}
-		
-		model.addAttribute("cart_items", items );
-		
-		return "cart";
-	}
-	
-	@RequestMapping(value="/cart", method = RequestMethod.POST)
-	public String remove(Locale locale, Model model) {
-
-		return "cart";
+		return "redirect:/cart?userid=" + ui.getId();
 	}
 }

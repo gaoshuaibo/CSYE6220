@@ -148,4 +148,9 @@ public class DishHome {
 			throw re;
 		}
 	}
+	
+	public List getAll() {
+		Dish all = new Dish();
+		return findByExample(all);
+	}
 }

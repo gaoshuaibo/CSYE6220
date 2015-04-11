@@ -12,6 +12,10 @@ public class Restaurant implements java.io.Serializable {
 	private String address;
 	private Integer accountId;
 
+	private Location location;
+	public Location getLocation(){return this.location;}
+	public void setLocation(Location location){this.location = location;}
+	
 	public Restaurant() {
 	}
 

@@ -1,5 +1,6 @@
 package com.embio.tht.controller;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.List;
 
@@ -14,30 +15,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.embio.tht.beans.*;
 import com.embio.tht.common.Checker;
+import com.embio.tht.common.ModelFactory;
 /**
  * Handles requests for the application home page.
  */
 @Controller
 @RequestMapping(value = "/")
-public class HomeController {
+public class WelcomeController {
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String welcome(Locale locale, Model model) {
-		
-//		DishHome dishDao = new DishHome();
-//		Dish search = new Dish();
-//		search.setRestaurantId(1);
-//		List<Dish> dishes = dishDao.findByExample(search);
-//
-//		model.addAttribute("dishes", dishes );
 
-		return "redirect:home";
+		return "redirect:welcome";
 	}
 	
-	@RequestMapping(value = "home", method = RequestMethod.GET)
+	@RequestMapping(value = "welcome", method = RequestMethod.GET)
 	public String homeLoggedIn(
 			@RequestParam(value="userid", required=false) String _userid,
 			Locale locale,
@@ -50,27 +45,16 @@ public class HomeController {
 				model.addAttribute("user", ui );
 		}
 		
-		DishHome dishDao = new DishHome();
-		Dish search = new Dish();
-		search.setRestaurantId(1);
-		List<Dish> dishes = dishDao.findByExample(search);
+		DishHome ddao = new DishHome();
+		List<Dish> temps = ddao.getAll();
+		List<Dish> dishes = new ArrayList<Dish>();
+		for(Dish temp:temps){
+			dishes.add(ModelFactory.getDish(temp.getId()));
+		}
 		
 		model.addAttribute("dishes", dishes );
 
 		
-		return "home";
+		return "view_welcome";
 	}
-	
-//	@RequestMapping(value = "home", method = RequestMethod.GET)
-//	public String home(Locale locale, Model model) {
-//		
-//		DishHome dishDao = new DishHome();
-//		Dish search = new Dish();
-//		search.setRestaurantId(1);
-//		List<Dish> dishes = dishDao.findByExample(search);
-//		
-//		model.addAttribute("dishes", dishes );
-//		
-//		return "home";
-//	}
 }

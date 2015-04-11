@@ -11,6 +11,10 @@ public class DishIngredientItem implements java.io.Serializable {
 	private Integer amount;
 	private Integer dishId;
 
+	private Ingredient ingredient;
+	public Ingredient getIngredient(){return this.ingredient;}
+	public void setIngredient(Ingredient ingredient){this.ingredient = ingredient;}
+	
 	public DishIngredientItem() {
 	}
 

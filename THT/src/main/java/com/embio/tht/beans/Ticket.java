@@ -9,21 +9,21 @@ public class Ticket implements java.io.Serializable {
 	private Integer id;
 	private String code;
 	private String expiredate;
-	private Integer orderId;
+	private Integer orderItemId;
 
 	public Ticket() {
 	}
 
-	public Ticket(int id, Integer orderId) {
+	public Ticket(int id, Integer orderItemId) {
 		this.id = id;
-		this.orderId = orderId;
+		this.orderItemId = orderItemId;
 	}
 
-	public Ticket(int id, String code, String expiredate, Integer orderId) {
+	public Ticket(int id, String code, String expiredate, Integer orderItemId) {
 		this.id = id;
 		this.code = code;
 		this.expiredate = expiredate;
-		this.orderId = orderId;
+		this.orderItemId = orderItemId;
 	}
 
 	public Integer getId() {
@@ -50,12 +50,12 @@ public class Ticket implements java.io.Serializable {
 		this.expiredate = expiredate;
 	}
 
-	public Integer getOrderId() {
-		return this.orderId;
+	public Integer getOrderItemId() {
+		return this.orderItemId;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOrderItemId(int orderItemId) {
+		this.orderItemId = orderItemId;
 	}
 
 }

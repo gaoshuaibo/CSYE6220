@@ -26,19 +26,14 @@ public class UserController {
 	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public String getView(
-			@RequestParam(value="userid", required=false) String _userid,
+			@RequestParam(value="userid") Integer _userid,
 			Model model) {
-		if(_userid == null){
-			return "login";
-		}
+		UserInfo ui = Checker.isUserLoggedIn(_userid);
 		
-		int userid = Integer.parseInt(_userid);
-		UserInfo ui = Checker.isUserLoggedIn(userid);
-		
-		if(ui == null) return "login";
+		if(ui == null) return "redirect:/account/login/user";
 
 		model.addAttribute("user",ui);
 		
-		return "user";
+		return "view_user_home";
 	}
 }

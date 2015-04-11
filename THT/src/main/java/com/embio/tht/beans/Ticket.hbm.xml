@@ -16,8 +16,8 @@
         <property name="expiredate" type="java.lang.String">
             <column name="EXPIREDATE" length="50" />
         </property>
-        <property name="orderId" type="java.lang.Integer">
-            <column name="ORDER_ID" precision="22" scale="0" not-null="true" />
+        <property name="orderItemId" type="java.lang.Integer">
+            <column name="ORDER_ITEM_ID" precision="22" scale="0" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

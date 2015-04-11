@@ -11,10 +11,22 @@ public class CartItemUnit implements java.io.Serializable {
 	private Integer quantity;
 	private Integer restaurantId;
 	private Integer userInfoId;
-
+	
+	private Integer placed;
+	public Integer getPlaced(){return this.placed;}
+	public void setPlaced(Integer placed){this.placed = placed;}
+	
 	private Dish dish;
 	public Dish getDish(){return this.dish;}
 	public void setDish(Dish dish){this.dish = dish;}
+	
+	private Restaurant restaurant;
+	public Restaurant getRestaurant(){return this.restaurant;}
+	public void setRestaurant(Restaurant dish){this.restaurant = restaurant;}
+	
+	private UserInfo userInfo;
+	public UserInfo getUserInfo(){return this.userInfo;}
+	public void setUserInfo(UserInfo dish){this.userInfo = userInfo;}
 	
 	public CartItemUnit() {
 	}
