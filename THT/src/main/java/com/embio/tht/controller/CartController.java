@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.embio.tht.beans.*;
 import com.embio.tht.common.Checker;
+import com.embio.tht.common.DaoPool;
 import com.embio.tht.common.ModelFactory;
 /**
  * Handles requests for the application home page.
@@ -39,8 +40,7 @@ public class CartController {
 		CartItemUnit ciu = new CartItemUnit();
 		ciu.setUserInfoId(ui.getId());
 		ciu.setPlaced(0);
-		CartItemUnitHome ciudao = new CartItemUnitHome();
-		List<CartItemUnit> temps = ciudao.findByExample(ciu);
+		List<CartItemUnit> temps = DaoPool.getCartItemUnitDao().findByExample(ciu);
 		List<CartItemUnit> items = new ArrayList<CartItemUnit>();
 		
 		for(CartItemUnit temp:temps){
@@ -59,9 +59,8 @@ public class CartController {
 			Model model) {
 			UserInfo ui = Checker.isUserLoggedIn(_userid);
 			
-			CartItemUnitHome ciudao = new CartItemUnitHome();
-			CartItemUnit ciu = ciudao.findById(_itemid);
-			ciudao.delete(ciu);
+			CartItemUnit ciu = DaoPool.getCartItemUnitDao().findById(_itemid);
+			DaoPool.getCartItemUnitDao().delete(ciu);
 
 		return "redirect:/cart?userid=" + _userid;
 	}
@@ -89,8 +88,7 @@ public class CartController {
 		ciu.setUserInfoId(ui.getId());
 		ciu.setPlaced(0);
 		
-		CartItemUnitHome ciudao = new CartItemUnitHome();
-		ciudao.persist(ciu);
+		DaoPool.getCartItemUnitDao().persist(ciu);
 		
 		return "redirect:/cart?userid=" + ui.getId();
 	}

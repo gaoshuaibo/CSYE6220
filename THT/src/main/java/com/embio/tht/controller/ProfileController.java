@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.embio.tht.beans.*;
 import com.embio.tht.common.Checker;
+import com.embio.tht.common.ModelFactory;
 /**
  * Handles requests for the application home page.
  */
@@ -32,10 +33,6 @@ public class ProfileController {
 		if(r == null) return "redirect:/account/login/restaurant";
 		model.addAttribute("restaurant", r);
 		
-		LocationHome ldao = new LocationHome();
-		Location l = ldao.findById(r.getLocationId());
-		model.addAttribute("location", l);
-		
 		return "view_restaurant_profile";
 	}
 	
@@ -46,10 +43,6 @@ public class ProfileController {
 		UserInfo ui = Checker.isUserLoggedIn(_userid);
 		if(ui == null) return "redirect:/account/login/user";
 		model.addAttribute("user", ui);
-		
-		LocationHome ldao = new LocationHome();
-		Location l = ldao.findById(ui.getLocationId());
-		model.addAttribute("location", l);
 		
 		return "view_user_profile";
 	}

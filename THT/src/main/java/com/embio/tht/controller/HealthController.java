@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.embio.tht.beans.*;
 import com.embio.tht.common.Checker;
+import com.embio.tht.common.HealthEngine;
+import com.embio.tht.common.HealthReportModel;
+import com.embio.tht.common.ModelFactory;
+import com.embio.tht.common.TrackUnitModel;
 /**
  * Handles requests for the application home page.
  */
@@ -30,16 +34,28 @@ public class HealthController {
 			Model model) {
 		UserInfo ui = Checker.isUserLoggedIn(_userid);
 		if(ui == null) return "redirect:/account/login/user";
-		model.addAttribute("user", ui);
 		
-		//today input calorie
-		model.addAttribute("today_calorie", null);
+		HealthReportModel healthReportModel = HealthEngine.AnalysisUser(ui);
 		
-		//total input calorie
-		model.addAttribute("total_calorie", null);
+		String dates = "";
+		String calories = "";
+		int index = 0;
+		for(TrackUnitModel item:healthReportModel.getTrace().getItems()){
+			if(dates.isEmpty()){
+				dates = "\"" + item.getDisplayDate() + "\"";
+				calories = "\"" + item.getCalorie() + "\"";
+			}
+			else{
+				dates += "," + "\"" +  item.getDisplayDate() + "\"";
+				calories += "," + "\"" +  item.getCalorie() + "\"";
+			}
+		}
 		
-		//chart generation
+		model.addAttribute("healthReport", healthReportModel);
+		model.addAttribute("dates", dates);
+		model.addAttribute("calories", calories);
 		
 		return "view_user_health_report";
+
 	}
 }

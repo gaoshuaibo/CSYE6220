@@ -13,8 +13,13 @@ public class OrderInfo implements java.io.Serializable {
 	private Integer customerId;
 	private String timeStamp;
 
-	private ArrayList<OrderItem> items = new ArrayList<OrderItem>();
-	public ArrayList<OrderItem> getItems(){return this.items;}
+	private List<OrderItem> items = new ArrayList<OrderItem>();
+	public List<OrderItem> getItems(){return this.items;}
+	public void setItems(List<OrderItem> items){this.items = items;}
+	
+	private UserInfo userInfo;
+	public UserInfo getUserInfo(){return this.userInfo;}
+	public void setUserInfo(UserInfo dish){this.userInfo = userInfo;}
 	
 	public OrderInfo() {
 	}
@@ -57,6 +62,28 @@ public class OrderInfo implements java.io.Serializable {
 		this.timeStamp = timeStamp;
 	}
 
+	public Integer getComsumedCalorie(){
+		int calorie = 0;
+		for(OrderItem oi:items){
+			calorie += oi.getComsumedCalorie();
+		}
+		return calorie;
+	}
+	
+	public Integer getUncomsumedCalorie(){
+		int calorie = 0;
+		for(OrderItem oi:items){
+			calorie += oi.getUncomsumedCalorie();
+		}
+		return calorie;
+	}
 
-
+	public Integer getTodayComsumedCalorie(){
+		int calorie = 0;
+		for(OrderItem oi:items){
+			if(oi.isConsumedToday())
+				calorie += oi.getComsumedCalorie();
+		}
+		return calorie;
+	}
 }

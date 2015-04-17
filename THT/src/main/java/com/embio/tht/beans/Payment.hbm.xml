@@ -25,5 +25,14 @@
         <property name="isOnline" type="java.lang.Integer">
             <column name="IS_ONLINE" precision="22" scale="0" />
         </property>
+        <property name="cardId" type="java.lang.String">
+            <column name="CARD_ID" length="20" />
+        </property>
+        <property name="expireMonth" type="java.lang.String">
+            <column name="EXPIRE_MONTH" length="20" />
+        </property>
+        <property name="expireYear" type="java.lang.String">
+            <column name="EXPIRE_YEAR" length="20" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -14,10 +14,13 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.embio.tht.ajax.AjaxUtils;
+import com.embio.tht.beans.*;
+import com.embio.tht.common.Checker;
 import com.embio.tht.common.FileUploader;
+import com.embio.tht.common.TicketGenerater;
 
 @Controller
-@RequestMapping("/fileupload")
+@RequestMapping("/form_dish_add_step2")
 public class FileUploadController {
 
 	@ModelAttribute
@@ -26,14 +29,31 @@ public class FileUploadController {
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	public void processUpload(@RequestParam MultipartFile image, Model model, HttpSession session) throws IOException {
-		model.addAttribute("message", "image '" + image.getOriginalFilename() + "' uploaded successfully");
+	public void processUpload(
+			@RequestParam MultipartFile image,
+			Model model,
+			Integer restaurantid,
+			String dishname,
+			Double dishprice,
+			HttpSession session) throws IOException {
+		
+		Restaurant r = Checker.isRestaurantLoggedIn(restaurantid);
+		assert(r!=null);
+		model.addAttribute("restaurant", r );
+		
+		String image_name = "image_not_found.jpg";
 		try{
-			String path = session.getServletContext().getRealPath("/");
-			FileUploader.saveFileFromInputStream(image.getInputStream(), path, image.getOriginalFilename());
+			String path = session.getServletContext().getRealPath("/") + "/resources/images";
+			image_name = TicketGenerater.generateCode()+".jpg";
+			FileUploader.saveFileFromInputStream(image.getInputStream(), path, image_name);
 		}
 		catch(Exception ex){
 		}
+		model.addAttribute("restaurant", r );
+		model.addAttribute("dishname", dishname);
+		model.addAttribute("dishprice", dishprice);
+		model.addAttribute("message", "Image '" + image.getOriginalFilename() + "' uploaded successfully");
+		model.addAttribute("dishimage", image_name);
 	}
 	
 }

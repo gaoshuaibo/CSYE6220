@@ -8,8 +8,7 @@ import com.embio.tht.beans.*;
 public final class SearchEngine {
 
 	public final static List<Dish> searchDish(String keyword){
-		DishHome ddao = new DishHome();
-		List<Dish> dishes = ddao.getAll();
+		List<Dish> dishes = DaoPool.getDishDao().getAll();
 		List<Dish> filter = new ArrayList<Dish>();
 		for(Dish dish:dishes){
 			if(dish.getName().contains(keyword)){

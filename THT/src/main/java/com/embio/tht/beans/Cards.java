@@ -8,7 +8,15 @@ public class Cards implements java.io.Serializable {
 
 	private Integer id;
 	private String cardId;
-	private String expireDate;
+
+	private String expireMonth;
+	public String getExpireMonth(){return this.expireMonth;}
+	public void setExpireMonth(String expireMonth){this.expireMonth = expireMonth;}
+	
+	private String expireYear;
+	public String getExpireYear(){return this.expireYear;}
+	public void setExpireYear(String expireYear){this.expireYear = expireYear;}
+
 
 	public Cards() {
 	}
@@ -20,7 +28,6 @@ public class Cards implements java.io.Serializable {
 	public Cards(int id, String cardId, String expireDate) {
 		this.id = id;
 		this.cardId = cardId;
-		this.expireDate = expireDate;
 	}
 
 	public Integer getId() {
@@ -37,14 +44,6 @@ public class Cards implements java.io.Serializable {
 
 	public void setCardId(String cardId) {
 		this.cardId = cardId;
-	}
-
-	public String getExpireDate() {
-		return this.expireDate;
-	}
-
-	public void setExpireDate(String expireDate) {
-		this.expireDate = expireDate;
 	}
 
 }

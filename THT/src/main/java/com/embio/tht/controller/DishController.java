@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.embio.tht.beans.*;
 import com.embio.tht.common.Checker;
+import com.embio.tht.common.DaoPool;
 import com.embio.tht.common.FileUploader;
 import com.embio.tht.common.ModelFactory;
 /**
@@ -88,8 +89,7 @@ public class DishController {
 		
 		Dish search = new Dish();
 		search.setRestaurantId(_restaurantid);
-		DishHome ddao = new DishHome();
-		List<Dish> temps = ddao.findByExample(search);
+		List<Dish> temps = DaoPool.getDishDao().findByExample(search);
 		List<Dish> dishes = new ArrayList<Dish>();
 		for(Dish temp:temps){
 			dishes.add(ModelFactory.getDish(temp.getId()));
@@ -109,9 +109,8 @@ public class DishController {
 		assert(r!=null);
 		model.addAttribute("restaurant", r );
 		
-		DishHome ddao = new DishHome();
-		Dish dish = ddao.findById(_dishid);
-		ddao.delete(dish);
+		Dish dish = DaoPool.getDishDao().findById(_dishid);
+		DaoPool.getDishDao().delete(dish);
 
 		return "redirect:/dish/view/restaurant?restaurantid="+r.getId();
 	}
@@ -124,27 +123,80 @@ public class DishController {
 		assert(r!=null);
 		model.addAttribute("restaurant", r );
 
-		return "form_dish_add";
+		return "form_dish_add_step1";
 	}
 	
-	@RequestMapping(value="/add", method = RequestMethod.POST)
-	public String addDish(
+	@RequestMapping(value="/add/step1", method = RequestMethod.POST)
+	public String addDishStep1(
 			@RequestParam(value="restaurantid") Integer _restaurantid,
 			String name,
 			Double price,
-			String image,
 			Model model) {
 		Restaurant r = Checker.isRestaurantLoggedIn(_restaurantid);
 		assert(r!=null);
+		model.addAttribute("restaurant", r );
+		model.addAttribute("dishname", name);
+		model.addAttribute("dishprice", price);
+		return "form_dish_add_step2";
+	}	
+	
+	@RequestMapping(value="/add/step2", method = RequestMethod.POST)
+	public String addDishStep2(
+			@RequestParam(value="restaurantid") Integer _restaurantid,
+			String dishname,
+			Double dishprice,
+			String dishimage,
+			Model model) {
+		Restaurant r = Checker.isRestaurantLoggedIn(_restaurantid);
+		assert(r!=null);
+		model.addAttribute("restaurant", r );
 		
+		model.addAttribute("dishname", dishname);
+		model.addAttribute("dishprice", dishprice);
+		model.addAttribute("dishimage", dishimage);
+		
+		List<Ingredient> ingredients= DaoPool.getIngredientDao().getAll();
+		
+		model.addAttribute("ingredients", ingredients);
+		
+		return "form_dish_add_step3";
+	}
+	
+	@RequestMapping(value="/add/step3", method = RequestMethod.POST)
+	public String addDishStep3(
+			@RequestParam(value="restaurantid") Integer _restaurantid,
+			String dishname,
+			Double dishprice,
+			String dishimage,
+			String ingredient_selected,
+			String amount,
+			Model model) {
+		Restaurant r = Checker.isRestaurantLoggedIn(_restaurantid);
+		assert(r!=null);
+		model.addAttribute("restaurant", r );
+
 		Dish dish = new Dish();
-		dish.setName(name);
-		dish.setPrice(price);
+		dish.setName(dishname);
+		dish.setPrice(dishprice);
 		dish.setRestaurantId(_restaurantid);
-		dish.setImage(image);
+		dish.setImage(dishimage);
+		DaoPool.getDishDao().persist(dish);
 		
-		DishHome ddao = new DishHome();
-		ddao.persist(dish);
+		String [] ingredient_tmp = ingredient_selected.split(",");
+		String [] amount_tmp = amount.split(",");
+		ArrayList<String> amount_tmp_notempty = new ArrayList<String>();
+		for(String unit : amount_tmp){
+			if(!unit.isEmpty())amount_tmp_notempty.add(unit);
+		}
+		
+		for(int index=0;index<ingredient_tmp.length;index++){
+			DishIngredientItem dii = new DishIngredientItem();
+			dii.setDishId(dish.getId());
+			dii.setIngredientId(Integer.parseInt(ingredient_tmp[index]));
+			dii.setAmount(Integer.parseInt(amount_tmp_notempty.get(index)));
+			DaoPool.getDishIngredientItemDao().persist(dii);
+		}
+		
 
 		return "redirect:/dish/view/restaurant?restaurantid="+r.getId();
 	}

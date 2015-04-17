@@ -25,5 +25,8 @@
         <property name="consumeTime" type="java.lang.String">
             <column name="CONSUME_TIME" length="50" />
         </property>
+        <property name="used" type="java.lang.Integer">
+            <column name="USED" precision="22" scale="0" />
+        </property>
     </class>
 </hibernate-mapping>

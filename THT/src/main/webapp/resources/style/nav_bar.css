@@ -1,0 +1,188 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	margin: 0;
+	background: #f1f1f1 url(/tht/resources/images/background.png);
+}
+
+#header_1 {
+	position: fixed;
+	width: 100%;
+	height: 120px;
+}
+
+#content_1 {
+	padding-top: 130px;
+	padding-left: 15px;
+}
+
+.main_head {
+	margin: 0px;
+	width: 100%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.main_head header {
+	height: 130px;
+	position: relative;
+	background: #2a2d30;
+}
+
+.main_head header .left {
+	width: 250px;
+	float: left;
+}
+
+.main_panel #content .image_float_right {
+	padding-left: 10px;
+	padding-top: 40px;
+	float: right;
+}
+
+h2 {
+	border-bottom: 1px solid #a0a0a0;
+}
+
+#spliter {
+	position: relative;
+	width: 100%;
+	background: #ff0000;
+	height: 3px;
+}
+
+.middle {
+	position: relative;
+	width: auto;
+	float: left;
+}
+
+.middle ul {
+	list-style: none;
+	margin: 0 auto;
+	height: 50px;
+	padding: .3em;
+}
+
+.middle li {
+	float: left;
+	margin-right: 20px;
+}
+
+.middle li a {
+	display: block;
+	color: #bac0c9;
+	font-size: 18px;
+	background-color: #2a2d30;
+	border: 1px solid #2a2d30;
+	padding: .5em;
+	text-decoration: none;
+}
+
+.middle li a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.middle li ul {
+	display: none;
+	position: absolute;
+	padding: 0;
+	width: 200px;
+}
+
+.middle li:hover ul {
+	display: block;
+}
+
+.middle li li {
+	float: none;
+	border-bottom: 1px solid #bac0c9;
+}
+
+.middle li li a {
+	border: 1;
+	border-left: 1px solid #bac0c9;
+	border-right: 1px solid #bac0c9;
+}
+
+.down {
+	width: auto;
+}
+
+.down ul {
+	width: auto;
+}
+
+.down_left {
+	width: auto;
+}
+
+.down_left form {
+	float: left;
+}
+
+.down_left li {
+	/* 	width: 100%; */
+	width: auto;
+	/* 	float: left; */
+	/* 	margin-left: 95px; */
+	/* 	margin-right: 95px; */
+}
+
+#search_label {
+	color: #fff;
+	vertical-align: middle;
+}
+
+#search_button {
+	width: 35px;
+	height: 35px;
+	float: right;
+	vertical-align: middle;
+	padding-top: 7px;
+}
+
+#search_box {
+	height: 35px;
+	vertical-align: middle;
+}
+
+.main_panel {
+	width: 100%;
+}
+
+#logo {
+	float: left;
+}
+
+.left a {
+	/* 	color: #bac0c9; */
+	color: #fff;
+	font-size: 25px;
+	padding: .5em;
+	text-decoration: none;
+}
+
+.left {
+	margin: 10px;
+	float: left;
+	width: auto;
+}
+
+.down_left a {
+	/* 	display: block; */
+	color: #bac0c9;
+	font-size: 18px;
+	background-color: #2a2d30;
+	border: 1px solid #2a2d30;
+	padding: .5em;
+	text-decoration: none;
+}
+
+.down_right {
+	float: right;
+}
+
+.up {
+	min-width: 500;
+}

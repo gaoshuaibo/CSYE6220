@@ -29,7 +29,7 @@ public class SearchController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String Search(
 			@RequestParam(value="userid", required = false) String _userid,
-			@RequestParam(value="keyword") String _keyword,
+			String keyword,
 			Model model) {
 		
 		if(_userid != null){
@@ -39,7 +39,7 @@ public class SearchController {
 			model.addAttribute("user", ui);
 		}
 		
-		List<Dish> result = SearchEngine.searchDish(_keyword);
+		List<Dish> result = SearchEngine.searchDish(keyword);
 		model.addAttribute("result",result);
 		
 		return "view_search";

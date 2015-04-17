@@ -1,4 +1,6 @@
 package com.embio.tht.beans;
+
+import java.util.Date;
 // Generated Apr 6, 2015 10:54:41 PM by Hibernate Tools 3.4.0.CR1
 
 
@@ -15,6 +17,10 @@ public class OrderItem implements java.io.Serializable {
 	private Integer dishId;
 	private String consumeTime;
 
+	private Restaurant restaurant;
+	public Restaurant getRestaurant(){return this.restaurant;}
+	public void setRestaurant(Restaurant dish){this.restaurant = restaurant;}
+	
 	private Dish dish;
 	public Dish getDish(){return this.dish;}
 	public void setDish(Dish dish){this.dish = dish;}
@@ -22,6 +28,10 @@ public class OrderItem implements java.io.Serializable {
 	private Ticket ticket;
 	public Ticket getTicket(){return this.ticket;}
 	public void setTicket(Ticket ticket){this.ticket = ticket;}
+	
+	private Integer used;
+	public Integer getUsed(){return this.used;}
+	public void setUsed(Integer used){this.used = used;}
 	
 	public OrderItem() {
 	}
@@ -77,5 +87,43 @@ public class OrderItem implements java.io.Serializable {
 
 	public void setConsumeTime(String consumeTime) {
 		this.consumeTime = consumeTime;
+	}
+	
+	public Integer getComsumedCalorie(){
+		if(this.used.equals(1))
+			return this.dish.getCalorie()*this.quantity;
+		return 0;
+	}
+	
+	public Integer getCalorie(){
+		return this.quantity*this.dish.getCalorie();
+	}
+	
+	public Integer getUncomsumedCalorie(){
+		if(this.used.equals(0))
+			return this.dish.getCalorie()*this.quantity;
+		return 0;
+	}
+	
+	public boolean isConsume(){
+		return this.used == 0?false:true;
+	}
+	
+	public boolean isConsumedToday(){
+		if(this.used.equals(0)) return false;
+		
+		Date consumeDay = new Date(this.consumeTime);
+		Date today = new Date();
+		
+		if(consumeDay.getYear() == today.getYear() &&
+			consumeDay.getMonth() == today.getMonth() &&
+			consumeDay.getDay() == today.getDay())
+			return true;
+		else
+			return false;
+	}
+	
+	public Date getConsumeDate(){
+		return new Date(this.consumeTime);
 	}
 }

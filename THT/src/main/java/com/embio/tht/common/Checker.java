@@ -8,8 +8,7 @@ public final class Checker {
 		UserInfo ui = ModelFactory.getUser(userid);
 		if(ui != null)
 		{
-			AccountInfoHome aidao = new AccountInfoHome();
-			AccountInfo ai = aidao.findById(ui.getAccountId());
+			AccountInfo ai = DaoPool.getAccountInfoDao().findById(ui.getAccountId());
 			if(ai != null)
 				return (ai.getIsLoggedIn() == 1)?ui:null;
 		}
@@ -20,8 +19,7 @@ public final class Checker {
 		Restaurant r = ModelFactory.getRestaurant(restaurantid);
 		if(r != null)
 		{
-			AccountInfoHome aidao = new AccountInfoHome();
-			AccountInfo ai = aidao.findById(r.getAccountId());
+			AccountInfo ai = DaoPool.getAccountInfoDao().findById(r.getAccountId());
 			if(ai != null)
 				return (ai.getIsLoggedIn() == 1)?r:null;
 		}

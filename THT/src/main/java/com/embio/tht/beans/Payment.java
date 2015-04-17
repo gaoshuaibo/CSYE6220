@@ -14,6 +14,18 @@ public class Payment implements java.io.Serializable {
 	private Integer orderId;
 	private Double discount;
 	private Integer isOnline;
+	
+	private String cardId;
+	public String getCardId(){return this.cardId;}
+	public void setCardId(String cardId){this.cardId = cardId;}
+	
+	private String expireMonth;
+	public String getExpireMonth(){return this.expireMonth;}
+	public void setExpireMonth(String expireMonth){this.expireMonth = expireMonth;}
+	
+	private String expireYear;
+	public String getExpireYear(){return this.expireYear;}
+	public void setExpireYear(String expireYear){this.expireYear = expireYear;}
 
 	public Payment() {
 	}

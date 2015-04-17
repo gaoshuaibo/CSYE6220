@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.embio.tht.beans.*;
 import com.embio.tht.common.Checker;
+import com.embio.tht.common.DaoPool;
 import com.embio.tht.common.ModelFactory;
 /**
  * Handles requests for the application home page.
@@ -45,8 +46,7 @@ public class WelcomeController {
 				model.addAttribute("user", ui );
 		}
 		
-		DishHome ddao = new DishHome();
-		List<Dish> temps = ddao.getAll();
+		List<Dish> temps = DaoPool.getDishDao().getAll();
 		List<Dish> dishes = new ArrayList<Dish>();
 		for(Dish temp:temps){
 			dishes.add(ModelFactory.getDish(temp.getId()));

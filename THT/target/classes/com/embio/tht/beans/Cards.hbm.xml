@@ -13,8 +13,11 @@
         <property name="cardId" type="java.lang.String">
             <column name="CARD_ID" length="50" />
         </property>
-        <property name="expireDate" type="java.lang.String">
-            <column name="EXPIRE_DATE" length="20" />
+        <property name="expireMonth" type="java.lang.String">
+            <column name="EXPIRE_MONTH" length="20" />
+        </property>
+        <property name="expireYear" type="java.lang.String">
+            <column name="EXPIRE_YEAR" length="20" />
         </property>
     </class>
 </hibernate-mapping>

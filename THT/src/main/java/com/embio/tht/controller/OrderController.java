@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.embio.tht.beans.*;
 import com.embio.tht.common.Checker;
+import com.embio.tht.common.DaoPool;
+import com.embio.tht.common.ModelFactory;
 import com.embio.tht.common.TicketGenerater;
 /**
  * Handles requests for the application home page.
@@ -37,24 +39,20 @@ public class OrderController {
 
 		OrderInfo search = new OrderInfo();
 		search.setCustomerId(ui.getId());
-		OrderInfoHome oinfodao = new OrderInfoHome();
-		List<OrderInfo> orders = oinfodao.findByExample(search);
+		List<OrderInfo> orders = DaoPool.getOrderInfoDao().findByExample(search);
 		
 		for(OrderInfo order:orders){
 			OrderItem search1 = new OrderItem();
 			search1.setOrderInfoId(order.getId());
-			OrderItemHome oitemdao = new OrderItemHome();
-			List<OrderItem> orderItems = oitemdao.findByExample(search1);
+			List<OrderItem> orderItems = DaoPool.getOrderItemDao().findByExample(search1);
 			for(OrderItem item:orderItems){
-				DishHome ddao = new DishHome();
-				Dish dish = ddao.findById(item.getDishId());
+				Dish dish = ModelFactory.getDish(item.getDishId());
 				item.setDish(dish);
 				order.getItems().add(item);
 				
 				Ticket search2 = new Ticket();
 				search2.setOrderItemId(item.getId());
-				TicketHome tdao = new TicketHome();
-				Ticket t = tdao.findFirstByExample(search2);
+				Ticket t = DaoPool.getTicketDao().findFirstByExample(search2);
 				item.setTicket(t);
 			}
 		}
@@ -74,19 +72,16 @@ public class OrderController {
 		
 		OrderItem search = new OrderItem();
 		search.setRestaurantId(r.getId());
-		OrderItemHome oitemdao = new OrderItemHome();
-		List<OrderItem> orderItems = oitemdao.findByExample(search);
+		List<OrderItem> orderItems = DaoPool.getOrderItemDao().findByExample(search);
 		for(OrderItem item:orderItems){
-			DishHome ddao = new DishHome();
-			Dish dish = ddao.findById(item.getDishId());
-			item.setDish(dish);
+			item.setDish(ModelFactory.getDish(item.getDishId()));
 		}
 
 		model.addAttribute("orderItems", orderItems);
 		
 		return "view_restaurant_order";
 	}
-	@RequestMapping(value = "/place", method = RequestMethod.POST)
+	@RequestMapping(value = "/place", method = RequestMethod.GET)
 	public String place(
 			@RequestParam(value="userid") Integer _userid,
 			Model model) {
@@ -96,14 +91,12 @@ public class OrderController {
 		OrderInfo oinfo = new OrderInfo();
 		oinfo.setCustomerId(ui.getId());
 		oinfo.setTimeStamp((new Date()).toString());
-		OrderInfoHome oinfodao = new OrderInfoHome();
-		oinfodao.persist(oinfo);
+		DaoPool.getOrderInfoDao().persist(oinfo);
 		
 		CartItemUnit ciu = new CartItemUnit();
 		ciu.setUserInfoId(ui.getId());
 		ciu.setPlaced(0);
-		CartItemUnitHome ciudao = new CartItemUnitHome();
-		List<CartItemUnit> items = ciudao.findByExample(ciu);
+		List<CartItemUnit> items = DaoPool.getCartItemUnitDao().findByExample(ciu);
 		
 		for(CartItemUnit item:items){
 			OrderItem oitem = new OrderItem();
@@ -111,17 +104,16 @@ public class OrderController {
 			oitem.setOrderInfoId(oinfo.getId());
 			oitem.setQuantity(item.getQuantity());
 			oitem.setRestaurantId(item.getRestaurantId());
-			OrderItemHome oitemdao = new OrderItemHome();
-			oitemdao.persist(oitem);
+			oitem.setUsed(0);
+			DaoPool.getOrderItemDao().persist(oitem);
 			
 			Ticket ticket = new Ticket();
 			ticket.setOrderItemId(oitem.getId());
 			ticket.setCode(TicketGenerater.generateCode());
-			TicketHome tdao = new TicketHome();
-			tdao.persist(ticket);
+			DaoPool.getTicketDao().persist(ticket);
 			
 			item.setPlaced(1);
-			ciudao.attachDirty(item);
+			DaoPool.getCartItemUnitDao().attachDirty(item);
 		}
 
 		return "redirect:/order/view/user?userid="+ui.getId();
@@ -135,17 +127,16 @@ public class OrderController {
 			Model model) {
 		Ticket search = new Ticket();
 		search.setOrderItemId(_itemid);
-		TicketHome tdao = new TicketHome();
-		Ticket t = tdao.findFirstByExample(search);
+		Ticket t = DaoPool.getTicketDao().findFirstByExample(search);
 		if(!t.getCode().equals(code)){
 			//TODO send error
 			return "error";
 		}
 		
-		OrderItemHome oitemdao = new OrderItemHome();
-		OrderItem oi = oitemdao.findById(_itemid);
+		OrderItem oi = DaoPool.getOrderItemDao().findById(_itemid);
+		oi.setUsed(1);
 		oi.setConsumeTime((new Date()).toString());
-		oitemdao.attachDirty(oi);		
+		DaoPool.getOrderItemDao().attachDirty(oi);		
 		
 		return "redirect:/order/view/restaurant?restaurantid=" + _restaurantid;
 	}

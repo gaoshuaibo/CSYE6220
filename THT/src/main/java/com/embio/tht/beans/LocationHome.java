@@ -149,4 +149,16 @@ public class LocationHome {
 			throw re;
 		}
 	}
+	
+	public List<Location> getAll() {
+		log.debug("finding first UserInfo instance by example");
+		try {
+			List<Location> items = findByExample(new Location());
+			log.debug("find one by example successful, result size: 1");
+			return items;
+		} catch (RuntimeException re) {
+			log.error("find one by example failed", re);
+			throw re;
+		}
+	}
 }
