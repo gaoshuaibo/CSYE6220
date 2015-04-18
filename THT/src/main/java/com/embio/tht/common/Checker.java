@@ -4,11 +4,11 @@ import com.embio.tht.beans.*;
 
 public final class Checker {
 
-	public static UserInfo isUserLoggedIn(Integer userid){
-		UserInfo ui = ModelFactory.getUser(userid);
+	public static Customer isUserLoggedIn(Integer userid){
+		Customer ui = ModelFactory.getCustomer(userid);
 		if(ui != null)
 		{
-			AccountInfo ai = DaoPool.getAccountInfoDao().findById(ui.getAccountId());
+			Users ai = DaoPool.getUsersDao().findById(ui.getAccountId());
 			if(ai != null)
 				return (ai.getIsLoggedIn() == 1)?ui:null;
 		}
@@ -19,7 +19,7 @@ public final class Checker {
 		Restaurant r = ModelFactory.getRestaurant(restaurantid);
 		if(r != null)
 		{
-			AccountInfo ai = DaoPool.getAccountInfoDao().findById(r.getAccountId());
+			Users ai = DaoPool.getUsersDao().findById(r.getAccountId());
 			if(ai != null)
 				return (ai.getIsLoggedIn() == 1)?r:null;
 		}

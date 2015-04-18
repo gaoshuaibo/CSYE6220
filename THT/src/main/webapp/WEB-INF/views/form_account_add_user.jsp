@@ -31,7 +31,9 @@
 				<input type="email" name="email"><br>
 				<label for="password">Password:</label>
 				<input type="password" name="password"><br>
-					
+				<input type="hidden"
+				    name="${_csrf.parameterName}"
+				    value="${_csrf.token}"/>
 				<input type="submit" value="Register">
 			</form>
 		</div>

@@ -30,15 +30,13 @@ public class OrderController {
 	 */
 	@RequestMapping(value = "view/user", method = RequestMethod.GET)
 	public String order(
-			@RequestParam(value="userid") Integer _userid,
 			Locale locale, 
 			Model model) {
-		UserInfo ui = Checker.isUserLoggedIn(_userid);
-		if(ui == null) return "redirect:/account/login/user";
-		model.addAttribute("user", ui);
+		Customer customer = ModelFactory.getCurrentCustomer();
+		model.addAttribute("user",customer);
 
 		OrderInfo search = new OrderInfo();
-		search.setCustomerId(ui.getId());
+		search.setCustomerId(customer.getId());
 		List<OrderInfo> orders = DaoPool.getOrderInfoDao().findByExample(search);
 		
 		for(OrderInfo order:orders){
@@ -64,14 +62,12 @@ public class OrderController {
 	
 	@RequestMapping(value = "/view/restaurant", method = RequestMethod.GET)
 	public String order(
-			@RequestParam(value="restaurantid") Integer _restaurantid,
 			Model model) {
-		Restaurant r = Checker.isRestaurantLoggedIn(_restaurantid);
-		if(r == null) return "redirect:/account/login/restaurant";
-		model.addAttribute("restaurant", r);
+		Restaurant restaurant = ModelFactory.getCurrentRestaurant();
+		model.addAttribute("restaurant",restaurant);
 		
 		OrderItem search = new OrderItem();
-		search.setRestaurantId(r.getId());
+		search.setRestaurantId(restaurant.getId());
 		List<OrderItem> orderItems = DaoPool.getOrderItemDao().findByExample(search);
 		for(OrderItem item:orderItems){
 			item.setDish(ModelFactory.getDish(item.getDishId()));
@@ -83,18 +79,17 @@ public class OrderController {
 	}
 	@RequestMapping(value = "/place", method = RequestMethod.GET)
 	public String place(
-			@RequestParam(value="userid") Integer _userid,
 			Model model) {
-		UserInfo ui = Checker.isUserLoggedIn(_userid);
-		if(ui == null) return "redirect:/account/login/user";
+		Customer customer = ModelFactory.getCurrentCustomer();
+		model.addAttribute("user",customer);
 		
 		OrderInfo oinfo = new OrderInfo();
-		oinfo.setCustomerId(ui.getId());
+		oinfo.setCustomerId(customer.getId());
 		oinfo.setTimeStamp((new Date()).toString());
 		DaoPool.getOrderInfoDao().persist(oinfo);
 		
 		CartItemUnit ciu = new CartItemUnit();
-		ciu.setUserInfoId(ui.getId());
+		ciu.setUserInfoId(customer.getId());
 		ciu.setPlaced(0);
 		List<CartItemUnit> items = DaoPool.getCartItemUnitDao().findByExample(ciu);
 		
@@ -116,12 +111,11 @@ public class OrderController {
 			DaoPool.getCartItemUnitDao().attachDirty(item);
 		}
 
-		return "redirect:/order/view/user?userid="+ui.getId();
+		return "redirect:/order/view/user";
 	}
 	
 	@RequestMapping(value = "/consume", method = RequestMethod.POST)
 	public String consume(
-			@RequestParam(value="restaurantid") Integer _restaurantid,
 			@RequestParam(value="itemid") Integer _itemid,
 			String code,
 			Model model) {
@@ -138,6 +132,6 @@ public class OrderController {
 		oi.setConsumeTime((new Date()).toString());
 		DaoPool.getOrderItemDao().attachDirty(oi);		
 		
-		return "redirect:/order/view/restaurant?restaurantid=" + _restaurantid;
+		return "redirect:/order/view/restaurant";
 	}
 }

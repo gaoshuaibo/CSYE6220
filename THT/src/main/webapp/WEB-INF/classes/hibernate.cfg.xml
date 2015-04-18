@@ -9,7 +9,7 @@
   <property name="hibernate.connection.username">oracle_user1</property>
   <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
 <!--   <property name="hibernate.tht_hibernate_session_factory">com.factory.HibernateSessionFactory</property>  -->
-	<mapping resource="com/embio/tht/beans/AccountInfo.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Users.hbm.xml"/>
 	<mapping resource="com/embio/tht/beans/Allergy.hbm.xml"/>
 	<mapping resource="com/embio/tht/beans/Calorie.hbm.xml"/>
 	<mapping resource="com/embio/tht/beans/Cards.hbm.xml"/>
@@ -29,7 +29,7 @@
 	<mapping resource="com/embio/tht/beans/Survey.hbm.xml"/>
 	<mapping resource="com/embio/tht/beans/SystemInfo.hbm.xml"/>
 	<mapping resource="com/embio/tht/beans/Ticket.hbm.xml"/>
-	<mapping resource="com/embio/tht/beans/UserInfo.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Customer.hbm.xml"/>
 	<mapping resource="com/embio/tht/beans/Restaurant.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

@@ -19,8 +19,7 @@
 				<c:forEach items="${dishes}" var="dish">
 				    <% if(index == 0) out.println( "<tr>");%>
 				    <td>
-				    	<c:if test="${user == null }"><a href = "/tht/dish/view/user?dishid=${dish.id}"></c:if>
-				    	<c:if test="${user != null }"><a href = "/tht/dish/view/user?dishid=${dish.id}&userid=${user.id}"></c:if>
+				    	<a href = "/tht/dish/view/user?dishid=${dish.id}">
 		 					<img height="200" width="200" alt="${dish.name}" src="/tht/resources/images/${dish.image}"><br>
 		 					Name: ${dish.name }<br>
 		 					Price: ${dish.price }<br>

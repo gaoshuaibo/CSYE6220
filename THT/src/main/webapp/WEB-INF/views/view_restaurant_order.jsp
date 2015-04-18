@@ -21,10 +21,13 @@
 		 			Quantity: ${item.quantity}<br>
 		 			Status: <c:if test="${item.used == 0}">Unused</c:if><c:if test="${item.used != 0}">Used (${item.consumeTime})</c:if>
 		 			<c:if test="${item.used == 0}">
-			 			<form action="/tht/order/consume?restaurantid=${restaurant.id}&itemid=${item.id}" method="POST">
+			 			<form action="/tht/order/consume?itemid=${item.id}" method="POST">
 				 			<label for="ticket">Confirm Ticket: </label>
 				 			<input type="text" name="code">
 				 			<input type="submit" value="Check">
+				 													<input type="hidden"
+				    name="${_csrf.parameterName}"
+				    value="${_csrf.token}"/>
 			 			</form>
 		 			</c:if>
 				</li>

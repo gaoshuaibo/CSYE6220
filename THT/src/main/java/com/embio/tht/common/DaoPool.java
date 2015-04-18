@@ -3,7 +3,7 @@ package com.embio.tht.common;
 import com.embio.tht.beans.*;
 
 public final class DaoPool {
-	private static AccountInfoHome accountInfoDao;
+	private static UsersHome usersDao;
 	private static AllergyHome allergyDao;
 	private static CalorieHome calorieDao;
 	private static CardsHome cardsDao;
@@ -24,9 +24,10 @@ public final class DaoPool {
 	private static SurveyHome surveyDao;
 	private static SystemInfoHome systemInfoDao;
 	private static TicketHome ticketDao;
-	private static UserInfoHome userInfoDao;
+	private static CustomerHome customerDao;
+	private static AuthoritiesHome authoritiesDao;
 	
-	public static AccountInfoHome getAccountInfoDao (){if( accountInfoDao == null)accountInfoDao =new AccountInfoHome ();return accountInfoDao;}
+	public static UsersHome getUsersDao (){if( usersDao == null)usersDao =new UsersHome ();return usersDao;}
 	public static AllergyHome getAllergyDao (){if( allergyDao == null)allergyDao =new AllergyHome ();return allergyDao;}
 	public static CalorieHome getCalorieDao (){if( calorieDao == null)calorieDao =new CalorieHome ();return calorieDao;}
 	public static CardsHome getCardsDao (){if( cardsDao == null)cardsDao =new CardsHome ();return cardsDao;}
@@ -47,5 +48,6 @@ public final class DaoPool {
 	public static SurveyHome getSurveyDao (){if( surveyDao == null)surveyDao =new SurveyHome ();return surveyDao;}
 	public static SystemInfoHome getSystemInfoDao (){if( systemInfoDao == null)systemInfoDao =new SystemInfoHome ();return systemInfoDao;}
 	public static TicketHome getTicketDao (){if( ticketDao == null)ticketDao =new TicketHome ();return ticketDao;}
-	public static UserInfoHome getUserInfoDao (){if( userInfoDao == null)userInfoDao =new UserInfoHome ();return userInfoDao;}
+	public static CustomerHome getCustomerDao (){if( customerDao == null)customerDao =new CustomerHome ();return customerDao;}
+	public static AuthoritiesHome getAuthoritiesDao (){if( authoritiesDao == null)authoritiesDao =new AuthoritiesHome ();return authoritiesDao;}
 }

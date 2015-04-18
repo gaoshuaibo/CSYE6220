@@ -7,7 +7,7 @@ import com.embio.tht.beans.*;
 
 public final class HealthEngine {
 
-	public static HealthReportModel AnalysisUser(UserInfo ui){
+	public static HealthReportModel AnalysisUser(Customer ui){
 		List<OrderInfo> orders = ModelFactory.getOrderInfosByUser(ui.getId());
 		
 		HealthReportModel healthReportModel = new HealthReportModel();

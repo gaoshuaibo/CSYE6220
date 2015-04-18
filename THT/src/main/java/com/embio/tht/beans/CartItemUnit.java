@@ -24,9 +24,9 @@ public class CartItemUnit implements java.io.Serializable {
 	public Restaurant getRestaurant(){return this.restaurant;}
 	public void setRestaurant(Restaurant dish){this.restaurant = restaurant;}
 	
-	private UserInfo userInfo;
-	public UserInfo getUserInfo(){return this.userInfo;}
-	public void setUserInfo(UserInfo dish){this.userInfo = userInfo;}
+	private Customer customer;
+	public Customer getCustomer(){return this.customer;}
+	public void setCustomer(Customer customer){this.customer = customer;}
 	
 	public CartItemUnit() {
 	}

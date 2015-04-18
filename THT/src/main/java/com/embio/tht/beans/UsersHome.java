@@ -19,9 +19,9 @@ import org.hibernate.criterion.Example;
  * @see .AccountInfo
  * @author Hibernate Tools
  */
-public class AccountInfoHome {
+public class UsersHome {
 
-	private static final Log log = LogFactory.getLog(AccountInfoHome.class);
+	private static final Log log = LogFactory.getLog(UsersHome.class);
 
 	private final SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
@@ -35,7 +35,7 @@ public class AccountInfoHome {
 		}
 	}
 
-	public void persist(AccountInfo transientInstance) {
+	public void persist(Users transientInstance) {
 		log.debug("persisting AccountInfo instance");
 		try {
 				Session session = sessionFactory.openSession();
@@ -50,7 +50,7 @@ public class AccountInfoHome {
 		}
 	}
 
-	public void attachDirty(AccountInfo instance) {
+	public void attachDirty(Users instance) {
 		log.debug("attaching dirty AccountInfo instance");
 		try {
 						Session session = sessionFactory.openSession();
@@ -65,7 +65,7 @@ public class AccountInfoHome {
 		}
 	}
 
-	public void attachClean(AccountInfo instance) {
+	public void attachClean(Users instance) {
 		log.debug("attaching clean AccountInfo instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
@@ -76,7 +76,7 @@ public class AccountInfoHome {
 		}
 	}
 
-	public void delete(AccountInfo persistentInstance) {
+	public void delete(Users persistentInstance) {
 		log.debug("deleting AccountInfo instance");
 		try {
 							Session session = sessionFactory.openSession();
@@ -91,10 +91,10 @@ public class AccountInfoHome {
 		}
 	}
 
-	public AccountInfo merge(AccountInfo detachedInstance) {
+	public Users merge(Users detachedInstance) {
 		log.debug("merging AccountInfo instance");
 		try {
-			AccountInfo result = (AccountInfo) sessionFactory
+			Users result = (Users) sessionFactory
 					.getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -104,13 +104,13 @@ public class AccountInfoHome {
 		}
 	}
 
-	public AccountInfo findById(int id) {
+	public Users findById(int id) {
 		log.debug("getting AccountInfo instance with id: " + id);
 		try {
 //			AccountInfo instance = (AccountInfo) sessionFactory
 //					.getCurrentSession().get("AccountInfo", id);
 			Session session = sessionFactory.openSession();
-			AccountInfo instance = (AccountInfo) session.get("com.embio.tht.beans.AccountInfo", id);
+			Users instance = (Users) session.get("com.embio.tht.beans.Users", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -123,11 +123,11 @@ public class AccountInfoHome {
 		}
 	}
 
-	public List findByExample(AccountInfo instance) {
+	public List findByExample(Users instance) {
 		log.debug("finding AccountInfo instance by example");
 		try {
 			Session session = sessionFactory.openSession();
-			List results = session.createCriteria("com.embio.tht.beans.AccountInfo")
+			List results = session.createCriteria("com.embio.tht.beans.Users")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -138,10 +138,10 @@ public class AccountInfoHome {
 		}
 	}
 	
-	public AccountInfo findFirstByExample(AccountInfo instance) {
+	public Users findFirstByExample(Users instance) {
 		log.debug("finding first UserInfo instance by example");
 		try {
-			List<AccountInfo> items = findByExample(instance);
+			List<Users> items = findByExample(instance);
 			log.debug("find one by example successful, result size: 1");
 			return (items==null||items.size()==0)?null:items.get(0);
 		} catch (RuntimeException re) {

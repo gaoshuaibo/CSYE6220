@@ -55,20 +55,20 @@ public class AccountController {
 			String username,
 			String password) {
 		
-		AccountInfo search = new AccountInfo();
-		search.setAccountName(username);
+		Users search = new Users();
+		search.setUserName(username);
 		search.setPassword(password);
-		AccountInfo ai = DaoPool.getAccountInfoDao().findFirstByExample(search);
+		Users ai = DaoPool.getUsersDao().findFirstByExample(search);
 		if(ai == null)
 		{
 			return "redirect:/account/login/user";
 		}
 		ai.setIsLoggedIn(1);
-		DaoPool.getAccountInfoDao().attachDirty(ai);
+		DaoPool.getUsersDao().attachDirty(ai);
 		
-		UserInfo search1 = new UserInfo();
+		Customer search1 = new Customer();
 		search1.setAccountId(ai.getId());
-		UserInfo ui = DaoPool.getUserInfoDao().findFirstByExample(search1);
+		Customer ui = DaoPool.getCustomerDao().findFirstByExample(search1);
 		
 		if(_go_to_welcome == null)
 			return "redirect:/user?userid=" + ui.getId();
@@ -82,16 +82,16 @@ public class AccountController {
 			String username,
 			String password) {
 		
-		AccountInfo search = new AccountInfo();
-		search.setAccountName(username);
+		Users search = new Users();
+		search.setUserName(username);
 		search.setPassword(password);
-		AccountInfo ai = DaoPool.getAccountInfoDao().findFirstByExample(search);
+		Users ai = DaoPool.getUsersDao().findFirstByExample(search);
 		if(ai == null)
 		{
 			return "redirect:/account/login/restaurant";
 		}
 		ai.setIsLoggedIn(1);
-		DaoPool.getAccountInfoDao().attachDirty(ai);
+		DaoPool.getUsersDao().attachDirty(ai);
 		
 		Restaurant search1 = new Restaurant();
 		search1.setAccountId(ai.getId());
@@ -121,22 +121,27 @@ public class AccountController {
 			String email,
 			String password
 			) {
-		UserInfo ui = new UserInfo();
+		Customer ui = new Customer();
 		ui.setName(name);
 		ui.setAge(age);
 		ui.setGender(gender);
 		ui.setLocationId(locationid);
 		ui.setAddress(address);
 		
-		AccountInfo ai = new AccountInfo();
-		ai.setAccountName(email);
+		Users ai = new Users();
+		ai.setUserName(email);
 		ai.setPassword(password);
 		ai.setIsLoggedIn(0);
-		ai.setStatus("active");
-		DaoPool.getAccountInfoDao().persist(ai);
+		ai.setEnabled(1);
+		DaoPool.getUsersDao().persist(ai);
 		
 		ui.setAccountId(ai.getId());
-		DaoPool.getUserInfoDao().persist(ui);
+		DaoPool.getCustomerDao().persist(ui);
+		
+		Authorities authorities = new Authorities();
+		authorities.setUsername(ai.getUserName());
+		authorities.setAuthority("ROLE_CUSTOMER");
+		DaoPool.getAuthoritiesDao().persist(authorities);
 		
 		model.addAttribute("user", ui);
 		model.addAttribute("account", ai);
@@ -165,15 +170,20 @@ public class AccountController {
 		r.setLocationId(locationid);
 		r.setAddress(address);
 		
-		AccountInfo ai = new AccountInfo();
-		ai.setAccountName(email);
+		Users ai = new Users();
+		ai.setUserName(email);
 		ai.setPassword(password);
 		ai.setIsLoggedIn(0);
-		ai.setStatus("active");
-		DaoPool.getAccountInfoDao().persist(ai);
+		ai.setEnabled(1);
+		DaoPool.getUsersDao().persist(ai);
 		
 		r.setAccountId(ai.getId());
 		DaoPool.getRestaurantDao().persist(r);
+		
+		Authorities authorities = new Authorities();
+		authorities.setUsername(ai.getUserName());
+		authorities.setAuthority("ROLE_RESTAURANT");
+		DaoPool.getAuthoritiesDao().persist(authorities);
 		
 		model.addAttribute("restaurant", r);
 		model.addAttribute("account", ai);

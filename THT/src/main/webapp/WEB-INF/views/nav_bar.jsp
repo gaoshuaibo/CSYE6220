@@ -12,9 +12,9 @@
 				<div class="middle">
 					<div class="up">
 						<ul>
-							<li><a href="/tht/account/login/user">I'm Customer</a></li>
-							<li><a href="/tht/account/login/restaurant">I'm Restaurant</a></li>
-							<li><a href="/tht/account/register">Register Now</a>
+							<li><a href="/tht/home">My Home</a></li>
+							<li><a href="/tht/restaurant">TODO</a></li>
+							<li><a href="/tht/account/register/user">Register Now</a>
 								<ul>
 									<li><a href="/tht/account/register/user" class="first">I'm Customer</a></li>
 									<li><a href="/tht/account/register/restaurant">I'm Restaurant</a></li>
@@ -29,14 +29,19 @@
 									<input id="search_box" type="text" name="keyword" autocomplete="off">
 									<c:if test="${user != null}"><input type="hidden" name="userid" value="${user.id}"></c:if>
 									<input type="image" id="search_button" src="/tht/resources/icons/search.png" value="GO">
+													<input type="hidden"
+				    name="${_csrf.parameterName}"
+				    value="${_csrf.token}"/>
 								</form>
-								<c:if test="${user == null}">
-									<a href="/tht/account/login/user?go_to_welcome=1">Login</a>
-					       			<a href="/tht/account/login/user?go_to_welcome=1">Cart</a>
+								<c:if test="${(user == null)&&(restaurant == null)}">
+									<a href="/tht/welcome_login">Login</a>
 								</c:if>
 								<c:if test="${user != null}">
-					       			<a href="/tht/user?userid=${user.id}">${user.name}</a>
-									<a href="/tht/cart?userid=${user.id}">Cart</a>
+					       			<a href="/tht/home">${user.name}</a>
+									<a href="/tht/cart">Cart</a>
+								</c:if>
+								<c:if test="${restaurant != null}">
+					       			<a href="/tht/home">${restaurant.name}</a>
 								</c:if>
 							</div>
 					</div>

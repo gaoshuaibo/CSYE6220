@@ -17,6 +17,7 @@ import com.embio.tht.ajax.AjaxUtils;
 import com.embio.tht.beans.*;
 import com.embio.tht.common.Checker;
 import com.embio.tht.common.FileUploader;
+import com.embio.tht.common.ModelFactory;
 import com.embio.tht.common.TicketGenerater;
 
 @Controller
@@ -32,14 +33,12 @@ public class FileUploadController {
 	public void processUpload(
 			@RequestParam MultipartFile image,
 			Model model,
-			Integer restaurantid,
 			String dishname,
 			Double dishprice,
 			HttpSession session) throws IOException {
 		
-		Restaurant r = Checker.isRestaurantLoggedIn(restaurantid);
-		assert(r!=null);
-		model.addAttribute("restaurant", r );
+		Restaurant restaurant = ModelFactory.getCurrentRestaurant();
+		model.addAttribute("restaurant",restaurant);
 		
 		String image_name = "image_not_found.jpg";
 		try{
@@ -49,7 +48,6 @@ public class FileUploadController {
 		}
 		catch(Exception ex){
 		}
-		model.addAttribute("restaurant", r );
 		model.addAttribute("dishname", dishname);
 		model.addAttribute("dishprice", dishprice);
 		model.addAttribute("message", "Image '" + image.getOriginalFilename() + "' uploaded successfully");

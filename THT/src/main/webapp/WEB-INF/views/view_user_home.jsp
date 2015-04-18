@@ -15,10 +15,10 @@
 		<div id="content_1">
 			Name: ${user.name}<br>
 			Age: ${user.age}<br>
-			<a href="/tht/order/view/user?userid=${user.id}">My orders</a><br>
-			<a href="/tht/profile/view/user?userid=${user.id}">My profile</a><br>
-			<a href="/tht/health/view/user?userid=${user.id}">My Healthy</a><br>
-			<a href="/tht/account/logout/user?userid=${user.id}">Log out</a><br>
+			<a href="/tht/order/view/user">My orders</a><br>
+			<a href="/tht/profile/view/user">My profile</a><br>
+			<a href="/tht/health/view/user">My Healthy</a><br>
+			<a href="/tht/account/logout/user">Log out</a><br>
 		</div>
 	</div>
 </body>

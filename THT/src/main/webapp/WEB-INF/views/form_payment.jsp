@@ -13,14 +13,16 @@
 	<div id="page_1">
 		<%@ include file="nav_bar.jsp"%>
 		<div id="content_1">
-			<form action="/tht/payment/commit?userid=${user.id}" method="POST">
+			<form action="/tht/payment/commit" method="POST">
 				<label for="cardid">Card Id:</label>
 				<input type="number" name="cardid"><br>
 				<label for="expiredate">Expire Month:</label>
 				<input type="number" min="1" max="12" name="expiremonth">
 				<label for="expiredate">Year:</label>
 				<input type="number" min="2016" max="2026" name="expireyear"><br>
-				
+								<input type="hidden"
+				    name="${_csrf.parameterName}"
+				    value="${_csrf.token}"/>
 				<input type="submit" value="Place Order">
 			</form>
 		</div>

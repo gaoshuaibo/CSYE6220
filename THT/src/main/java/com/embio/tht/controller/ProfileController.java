@@ -27,22 +27,18 @@ public class ProfileController {
 	 */
 	@RequestMapping(value = "/view/restaurant", method = RequestMethod.GET)
 	public String viewRestaurantProfile(
-			@RequestParam(value="restaurantid") Integer _restaurantid,
 			Model model) {
-		Restaurant r = Checker.isRestaurantLoggedIn(_restaurantid);
-		if(r == null) return "redirect:/account/login/restaurant";
-		model.addAttribute("restaurant", r);
+		Restaurant restaurant = ModelFactory.getCurrentRestaurant();
+		model.addAttribute("restaurant",restaurant);
 		
 		return "view_restaurant_profile";
 	}
 	
 	@RequestMapping(value = "/view/user", method = RequestMethod.GET)
 	public String viewUserProfile(
-			@RequestParam(value="userid") Integer _userid,
 			Model model) {
-		UserInfo ui = Checker.isUserLoggedIn(_userid);
-		if(ui == null) return "redirect:/account/login/user";
-		model.addAttribute("user", ui);
+		Customer customer = ModelFactory.getCurrentCustomer();
+		model.addAttribute("user",customer);
 		
 		return "view_user_profile";
 	}

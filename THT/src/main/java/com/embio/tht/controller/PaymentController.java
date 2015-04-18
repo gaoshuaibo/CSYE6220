@@ -39,25 +39,21 @@ public class PaymentController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String getPaymentForm(
-			int userid,
 			Model model) {
-		UserInfo ui = Checker.isUserLoggedIn(userid);
-		if(ui == null) return "redirect:/account/login/user";
-		
-		model.addAttribute("user", ui);
+		Customer customer = ModelFactory.getCurrentCustomer();
+		model.addAttribute("user",customer);
 		
 		return "form_payment";
 	}
 	
 	@RequestMapping(value="/commit", method = RequestMethod.POST)
 	public String commit(
-			@RequestParam(value="userid") int _userid,
 			String cardid,
 			String expiremonth,
 			String expireyear,
 			Model model) {
-		UserInfo ui = Checker.isUserLoggedIn(_userid);
-		if(ui == null) return "redirect:/account/login/user";
+		Customer customer = ModelFactory.getCurrentCustomer();
+		model.addAttribute("user",customer);
 		
 		Cards search = new Cards();
 		search.setCardId(cardid);
@@ -67,7 +63,7 @@ public class PaymentController {
 		
 		if(card.getExpireMonth().equals(expiremonth) && card.getExpireYear().equals(expireyear))
 		{
-			return "redirect:/order/place?userid=" + _userid;
+			return "redirect:/order/place";
 		}
 		
 		return "card verified failed";

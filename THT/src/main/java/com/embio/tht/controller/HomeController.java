@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,26 +16,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.embio.tht.beans.*;
 import com.embio.tht.common.Checker;
+import com.embio.tht.common.ModelFactory;
 /**
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping(value = "/user")
-public class UserController {
+@RequestMapping(value = "/home")
+public class HomeController {
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public String getView(
-			@RequestParam(value="userid") Integer _userid,
 			Model model) {
-		UserInfo ui = Checker.isUserLoggedIn(_userid);
-		
-		if(ui == null) return "redirect:/account/login/user";
 
-		model.addAttribute("user",ui);
+		String role = ModelFactory.getCurrentRole();
 		
-		return "view_user_home";
+		if(role.equals("ANONYMOUS"))
+			return "redirect:welcome_login";
+		else if(role.equals("ROLE_CUSTOMER")){
+			Customer customer = ModelFactory.getCurrentCustomer();
+			model.addAttribute("user",customer);
+			return "view_user_home";}
+		else if(role.equals("ROLE_RESTAURANT")){
+			Restaurant restaurant = ModelFactory.getCurrentRestaurant();
+			model.addAttribute("restaurant",restaurant);
+			return "view_restaurant_home";}
+		return "redirect:welcome_login";
 	}
 }

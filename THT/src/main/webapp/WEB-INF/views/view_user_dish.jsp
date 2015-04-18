@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <html>
 <head>
 <title>The Healthy Table - Home</title>
@@ -34,14 +34,12 @@
 				  	</tr>
 				</c:forEach>
 			</table>
-			<c:if test="${user == null}">
-				<form action="/tht/account/login/user" method="GET">
-			</c:if>
-			<c:if test="${user != null}">
-				<form action="/tht/cart/add?userid=${user.id}&dishid=${dish.id}&restaurantid=${dish.restaurant.id}" method="POST">
-			</c:if>
+			<form action="/tht/cart/add?dishid=${dish.id}&restaurantid=${dish.restaurant.id}" method="POST">
 				<label for="quantity">Quantity</label>
-				<input type="text" value name="quantity" autocomplete="off">
+				<input type="text" value name="quantity">
+				<input type="hidden"
+				    name="${_csrf.parameterName}"
+				    value="${_csrf.token}"/>
 				<input type="submit" value="Add to Cart">
 			</form>
 		</div>

@@ -35,15 +35,17 @@ public class WelcomeController {
 	
 	@RequestMapping(value = "welcome", method = RequestMethod.GET)
 	public String homeLoggedIn(
-			@RequestParam(value="userid", required=false) String _userid,
 			Locale locale,
 			Model model) {
+
+		String role = ModelFactory.getCurrentRole();
 		
-		if(_userid != null){
-			int userid = Integer.parseInt(_userid);
-			UserInfo ui = Checker.isUserLoggedIn(userid);
-			if(ui!=null)
-				model.addAttribute("user", ui );
+		if(role.equals("ROLE_CUSTOMER")){
+			Customer customer = ModelFactory.getCurrentCustomer();
+			model.addAttribute("user",customer);}
+		else if(role.equals("ROLE_RESTAURANT")){
+			Restaurant restaurant = ModelFactory.getCurrentRestaurant();
+			model.addAttribute("restaurant",restaurant);
 		}
 		
 		List<Dish> temps = DaoPool.getDishDao().getAll();
@@ -56,5 +58,12 @@ public class WelcomeController {
 
 		
 		return "view_welcome";
+	}
+	
+	@RequestMapping(value = "welcome_login", method = RequestMethod.GET)
+	public String welcome_login(
+			Locale locale,
+			Model model) {
+		return "login_redirect";
 	}
 }

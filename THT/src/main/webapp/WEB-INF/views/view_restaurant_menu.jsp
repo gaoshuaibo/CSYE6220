@@ -14,13 +14,13 @@
 		<%@ include file="nav_bar.jsp"%>
 		<div id="content_1">
 			<ul>
-			<a href="/tht/dish/add?restaurantid=${restaurant.id}">Add dish</a><br>
+			<a href="/tht/dish/add">Add dish</a><br>
 			<c:forEach items="${dishes}" var="dish">
 			    <li>
 	 				<img height="200" width="200" alt="${dish.name}" src="/tht/resources/images/${dish.image}"><br>
 	 				Name: ${dish.name}<br>
 	 				Price: ${dish.price}<br>
-					<form action="/tht/dish/remove?restaurantid=${restaurant.id}&dishid=${dish.id}" method="POST" name="dish_remove">
+					<form action="/tht/dish/remove?dishid=${dish.id}" method="POST" name="dish_remove">
 						<input type="submit" value="Remove">
 					</form>
 				</li>

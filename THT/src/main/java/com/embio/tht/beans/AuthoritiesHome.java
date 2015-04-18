@@ -1,5 +1,5 @@
 package com.embio.tht.beans;
-// Generated Apr 6, 2015 10:54:41 PM by Hibernate Tools 3.4.0.CR1
+// Generated Apr 17, 2015 8:20:08 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.List;
 
@@ -15,13 +15,13 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 
 /**
- * Home object for domain model class UserInfo.
- * @see .UserInfo
+ * Home object for domain model class Authorities.
+ * @see .Authorities
  * @author Hibernate Tools
  */
-public class UserInfoHome {
+public class AuthoritiesHome {
 
-	private static final Log log = LogFactory.getLog(UserInfoHome.class);
+	private static final Log log = LogFactory.getLog(AuthoritiesHome.class);
 
 	private final SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
@@ -35,10 +35,10 @@ public class UserInfoHome {
 		}
 	}
 
-	public void persist(UserInfo transientInstance) {
-		log.debug("persisting UserInfo instance");
+	public void persist(Authorities transientInstance) {
+		log.debug("persisting Authorities instance");
 		try {
-						Session session = sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
 			session.persist(transientInstance);
 			tx.commit();
@@ -50,15 +50,14 @@ public class UserInfoHome {
 		}
 	}
 
-	public void attachDirty(UserInfo instance) {
-		log.debug("attaching dirty UserInfo instance");
+	public void attachDirty(Authorities instance) {
+		log.debug("attaching dirty Authorities instance");
 		try {
 			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
 			session.saveOrUpdate(instance);
 			tx.commit();
 			session.close();
-			
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -66,8 +65,8 @@ public class UserInfoHome {
 		}
 	}
 
-	public void attachClean(UserInfo instance) {
-		log.debug("attaching clean UserInfo instance");
+	public void attachClean(Authorities instance) {
+		log.debug("attaching clean Authorities instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -77,14 +76,14 @@ public class UserInfoHome {
 		}
 	}
 
-	public void delete(UserInfo persistentInstance) {
-		log.debug("deleting UserInfo instance");
+	public void delete(Authorities persistentInstance) {
+		log.debug("deleting Authorities instance");
 		try {
-							Session session = sessionFactory.openSession();
-				Transaction tx = session.beginTransaction();
-				session.delete(persistentInstance);
-				tx.commit();
-				session.close();
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			session.delete(persistentInstance);
+			tx.commit();
+			session.close();
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -92,11 +91,11 @@ public class UserInfoHome {
 		}
 	}
 
-	public UserInfo merge(UserInfo detachedInstance) {
-		log.debug("merging UserInfo instance");
+	public Authorities merge(Authorities detachedInstance) {
+		log.debug("merging Authorities instance");
 		try {
-			UserInfo result = (UserInfo) sessionFactory.getCurrentSession()
-					.merge(detachedInstance);
+			Authorities result = (Authorities) sessionFactory
+					.getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -105,13 +104,11 @@ public class UserInfoHome {
 		}
 	}
 
-	public UserInfo findById(int id) {
-		log.debug("getting UserInfo instance with id: " + id);
+	public Authorities findById(Integer id) {
+		log.debug("getting Authorities instance with id: " + id);
 		try {
-//			UserInfo instance = (UserInfo) sessionFactory.getCurrentSession()
-//					.get("UserInfo", id);
 			Session session = sessionFactory.openSession();
-			UserInfo instance = (UserInfo) session.get("com.embio.tht.beans.UserInfo", id);
+			Authorities instance = (Authorities) session.get("com.embio.tht.beans.Authorities", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -124,29 +121,17 @@ public class UserInfoHome {
 		}
 	}
 
-	public List findByExample(UserInfo instance) {
-		log.debug("finding UserInfo instance by example");
+	public List findByExample(Authorities instance) {
+		log.debug("finding Authorities instance by example");
 		try {
 			Session session = sessionFactory.openSession();
-			List results = session.createCriteria("com.embio.tht.beans.UserInfo").add(Example.create(instance))
+			List results = session.createCriteria("com.embio.tht.beans.Authorities").add(Example.create(instance))
 					.list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
-			throw re;
-		}
-	}
-	
-	public UserInfo findFirstByExample(UserInfo instance) {
-		log.debug("finding first UserInfo instance by example");
-		try {
-			List<UserInfo> items = findByExample(instance);
-			log.debug("find one by example successful, result size: 1");
-			return (items==null||items.size()==0)?null:items.get(0);
-		} catch (RuntimeException re) {
-			log.error("find one by example failed", re);
 			throw re;
 		}
 	}

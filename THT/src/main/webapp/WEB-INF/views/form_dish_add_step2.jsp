@@ -2,6 +2,12 @@
 <%@ page session="false"%>
 <html>
 <head>
+
+	<!-- 	am crying now! -->
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    
 <title>The Healthy Table - Home</title>
 <link rel="stylesheet" href="/tht/resources/blueprint/screen.css" type="text/css" media="screen, projection">
 <link rel="stylesheet" href="/tht/resources/blueprint/print.css" type="text/css" media="print">
@@ -20,39 +26,51 @@
 			  	setSearchBoxWidth();
 			  </script>
 			  	<h2>Step 2: Upload Image</h2>
-			  	<form id="fileuploadForm" action="/tht/form_dish_add_step2" method="POST" enctype="multipart/form-data">
-					<c:if test="${not empty message}">
-						<div id="message" class="success">${message}</div>	  		
-			  		</c:if>
-					
-					<input type="hidden" name="restaurantid" value="${restaurant.id}"><br>
-					<input type="hidden" name="dishname" value="${dishname}"><br>
-					<input type="hidden" name="dishprice" value="${dishprice}"><br>
-					
-					<c:if test="${dishimage == null}">
-					<label for="image">Image:</label>
-					<input type="file" name="image" id="image"><br>
-					<input type="submit" value="Upload">
-					</c:if>
-				</form>
+			  	
+			  	<c:if test="${dishimage == null}">
+			  		<form id="fileuploadForm" action="/tht/form_dish_add_step2" method="POST" enctype="multipart/form-data">
+						<c:if test="${not empty message}">
+							<div id="message" class="success">${message}</div>	  		
+				  		</c:if>
+						<input type="hidden" name="dishname" value="${dishname}"><br>
+						<input type="hidden" name="dishprice" value="${dishprice}"><br>
+						
+						
+						<label for="image">Image:</label>
+						<input type="file" name="image" id="image"><br>
+						<input type="hidden"
+							    name="${_csrf.parameterName}"
+							    value="${_csrf.token}"/>
+						<input type="submit" value="Upload">
+					</form>
+					<script type="text/javascript">
+						    var token = $("meta[name='_csrf']").attr("content");
+						    var header = $("meta[name='_csrf_header']").attr("content");
+						    $(document).ajaxSend(function(e, xhr, options) {
+						        xhr.setRequestHeader(header, token);
+						    });
+						$(document).ready(function() {
+							$('<input type="hidden" name="ajaxUpload" value="true" />').insertAfter($("#image"));
+							$("#fileuploadForm").ajaxForm({ success: function(html) {
+									$("#page_1").replaceWith(html);
+								}
+							});
+						});
+					</script>
+				</c:if>
+				
 				<c:if test="${dishimage != null}">
 					<img height="300" width="300" alt="${dishname}" src="/tht/resources/images/${dishimage}"><br>
-					<form action="/tht/dish/add/step2?restaurantid=${restaurant.id}" method="POST">
+					<form action="/tht/dish/add/step2" method="POST">
 						<input type="hidden" name="dishname" value="${dishname}"><br>
 						<input type="hidden" name="dishprice" value="${dishprice}"><br>
 						<input type="hidden" name="dishimage" value="${dishimage}"><br>
 						<input type="submit" value="Next Step">
+						<input type="hidden"
+							    name="${_csrf.parameterName}"
+							    value="${_csrf.token}"/>
 					</form>
 				</c:if>
-				<script type="text/javascript">
-					$(document).ready(function() {
-						$('<input type="hidden" name="ajaxUpload" value="true" />').insertAfter($("#image"));
-						$("#fileuploadForm").ajaxForm({ success: function(html) {
-								$("#page_1").replaceWith(html);
-							}
-						});
-					});
-				</script>
 		</div>
 	</div>
 <c:if test="${!ajaxRequest}">

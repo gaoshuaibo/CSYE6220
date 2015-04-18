@@ -30,15 +30,14 @@ public class CartController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String cart(
-			@RequestParam(value="userid") Integer _userid,
 			Model model) {
 		
-		UserInfo ui = Checker.isUserLoggedIn(_userid);
-		if(ui == null) return "redirect:/account/login/user";
-		model.addAttribute("user", ui);
+		Customer customer = ModelFactory.getCurrentCustomer();
+
+		model.addAttribute("user",customer);
 
 		CartItemUnit ciu = new CartItemUnit();
-		ciu.setUserInfoId(ui.getId());
+		ciu.setUserInfoId(customer.getId());
 		ciu.setPlaced(0);
 		List<CartItemUnit> temps = DaoPool.getCartItemUnitDao().findByExample(ciu);
 		List<CartItemUnit> items = new ArrayList<CartItemUnit>();
@@ -54,42 +53,32 @@ public class CartController {
 	
 	@RequestMapping(value="/remove", method = RequestMethod.POST)
 	public String remove(
-			@RequestParam(value="userid") Integer _userid,
 			@RequestParam(value="itemid") Integer _itemid,
 			Model model) {
-			UserInfo ui = Checker.isUserLoggedIn(_userid);
 			
 			CartItemUnit ciu = DaoPool.getCartItemUnitDao().findById(_itemid);
 			DaoPool.getCartItemUnitDao().delete(ciu);
 
-		return "redirect:/cart?userid=" + _userid;
+		return "redirect:/cart";
 	}
 	
 	@RequestMapping(value="/add", method = RequestMethod.POST)
 	public String addToCart(
-			@RequestParam(value="userid", required=false) String _userid,
 			@RequestParam(value="dishid") Integer _dishid,
 			@RequestParam(value="restaurantid") Integer _restaurantid,
 			Integer quantity,
 			Model model) {
-		if(_userid == null){
-			return "redirect:/account/login/user";
-		}
-		
-		int userid = Integer.parseInt(_userid);
-		UserInfo ui = Checker.isUserLoggedIn(userid);
-		
-		if(ui == null) return "redirect:/account/login/user";
+		Customer customer = ModelFactory.getCurrentCustomer();
 		
 		CartItemUnit ciu = new CartItemUnit();
 		ciu.setDishId(_dishid);
 		ciu.setQuantity(quantity);
 		ciu.setRestaurantId(_restaurantid);
-		ciu.setUserInfoId(ui.getId());
+		ciu.setUserInfoId(customer.getId());
 		ciu.setPlaced(0);
 		
 		DaoPool.getCartItemUnitDao().persist(ciu);
 		
-		return "redirect:/cart?userid=" + ui.getId();
+		return "redirect:/cart";
 	}
 }

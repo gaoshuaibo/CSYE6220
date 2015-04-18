@@ -15,9 +15,9 @@
 		<div id="content_1">
 			Name: ${restaurant.name}<br>
 			Address: ${restaurant.address}<br>
-			<a href="/tht/order/view/restaurant?restaurantid=${restaurant.id}">My orders</a><br>
-			<a href="/tht/profile/view/restaurant/?restaurantid=${restaurant.id}">My profile</a><br>
-			<a href="/tht/dish/view/restaurant/?restaurantid=${restaurant.id}">My menu</a><br>
+			<a href="/tht/order/view/restaurant">My orders</a><br>
+			<a href="/tht/profile/view/restaurant">My profile</a><br>
+			<a href="/tht/dish/view/restaurant">My menu</a><br>
 		</div>
 	</div>
 </body>

@@ -30,12 +30,11 @@ public class HealthController {
 	 */
 	@RequestMapping(value = "/view/user", method = RequestMethod.GET)
 	public String generateHealthReport(
-			@RequestParam(value="userid") Integer _userid,
 			Model model) {
-		UserInfo ui = Checker.isUserLoggedIn(_userid);
-		if(ui == null) return "redirect:/account/login/user";
+		Customer customer = ModelFactory.getCurrentCustomer();
+		model.addAttribute("user",customer);
 		
-		HealthReportModel healthReportModel = HealthEngine.AnalysisUser(ui);
+		HealthReportModel healthReportModel = HealthEngine.AnalysisUser(customer);
 		
 		String dates = "";
 		String calories = "";

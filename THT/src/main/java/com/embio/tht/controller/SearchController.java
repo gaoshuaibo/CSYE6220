@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.embio.tht.beans.*;
 import com.embio.tht.common.Checker;
+import com.embio.tht.common.ModelFactory;
 import com.embio.tht.common.SearchEngine;
 /**
  * Handles requests for the application home page.
@@ -28,16 +29,10 @@ public class SearchController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String Search(
-			@RequestParam(value="userid", required = false) String _userid,
 			String keyword,
 			Model model) {
-		
-		if(_userid != null){
-			int userid = Integer.parseInt(_userid);
-			UserInfo ui = Checker.isUserLoggedIn(userid);
-			if(ui == null) return "redirect:/account/login/user";
-			model.addAttribute("user", ui);
-		}
+		Customer customer = ModelFactory.getCurrentCustomer();
+		model.addAttribute("user",customer);
 		
 		List<Dish> result = SearchEngine.searchDish(keyword);
 		model.addAttribute("result",result);

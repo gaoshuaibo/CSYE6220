@@ -20,12 +20,15 @@
 			  	setSearchBoxWidth();
 			  </script>
 				<h2>Step 1: Base Infomation</h2>
-				<form action="/tht/dish/add/step1?restaurantid=${restaurant.id}" method="POST">
+				<form action="/tht/dish/add/step1" method="POST">
 					<label for="name">Name:</label>
 					<input type="text" name="name"><br>
 					<label for="price">Price:</label>
 					<input type="number" name="price"><br>
 					<input type="submit" value="Next Step">
+									<input type="hidden"
+				    name="${_csrf.parameterName}"
+				    value="${_csrf.token}"/>
 <%-- 					<input type="hidden" name="image_path" value="${new_image_name}"><br> --%>
 				</form>
 		</div>

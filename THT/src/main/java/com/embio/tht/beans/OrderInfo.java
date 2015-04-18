@@ -17,9 +17,9 @@ public class OrderInfo implements java.io.Serializable {
 	public List<OrderItem> getItems(){return this.items;}
 	public void setItems(List<OrderItem> items){this.items = items;}
 	
-	private UserInfo userInfo;
-	public UserInfo getUserInfo(){return this.userInfo;}
-	public void setUserInfo(UserInfo dish){this.userInfo = userInfo;}
+	private Customer customer;
+	public Customer getCustomer(){return this.customer;}
+	public void setCustomer(Customer customer){this.customer = customer;}
 	
 	public OrderInfo() {
 	}

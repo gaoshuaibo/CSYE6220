@@ -19,14 +19,16 @@
 	 				<img height="100" width="100" alt="${item.dish.name}" src="/tht/resources/images/${item.dish.image}"><br>
 	 				Name: ${item.dish.name}<br>
 	 				Quantity: ${item.quantity}<br>
-					<form action="/tht/cart/remove?userid=${user.id}&itemid=${item.id}" method="POST" name="cart_remove">
+					<form action="/tht/cart/remove?itemid=${item.id}" method="POST" name="cart_remove">
 						<input type="submit" value="Remove">
+										<input type="hidden"
+				    name="${_csrf.parameterName}"
+				    value="${_csrf.token}"/>
 					</form>
 				</li>
 			</c:forEach>
 			</ul>
 			<form action="/tht/payment" method="GET">
-				<input type="hidden" value="${user.id}" name="userid">
 				<input type="submit" value="Place Order">
 			</form>
 		</div>
