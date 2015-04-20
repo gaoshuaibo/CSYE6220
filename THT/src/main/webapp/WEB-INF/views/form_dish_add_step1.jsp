@@ -6,8 +6,8 @@
 <link rel="stylesheet" href="/tht/resources/blueprint/screen.css" type="text/css" media="screen, projection">
 <link rel="stylesheet" href="/tht/resources/blueprint/print.css" type="text/css" media="print">
 <link href="<c:url value="/resources/style/form.css" />" rel="stylesheet"  type="text/css" />		
-<script type="text/javascript" src="<c:url value="/resources/jquery/1.6/jquery.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/jqueryform/2.8/jquery.form.js" />"></script>	
+<%-- <script type="text/javascript" src="<c:url value="/resources/jquery/1.6/jquery.js" />"></script> --%>
+<%-- <script type="text/javascript" src="<c:url value="/resources/jqueryform/2.8/jquery.form.js" />"></script>	 --%>
 <link href="<c:url value="/resources/style/nav_bar.css" />" rel="stylesheet"  type="text/css" />
 <link href="<c:url value="/resources/style/utl.css" />" rel="stylesheet"  type="text/css" />
 <script type="text/javascript" src="<c:url value="/resources/scripts/nav_bar.js" />"></script>

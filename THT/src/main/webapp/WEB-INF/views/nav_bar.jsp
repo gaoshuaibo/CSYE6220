@@ -14,7 +14,7 @@
 						<ul>
 							<li><a href="/tht/home">My Home</a></li>
 							<li><a href="/tht/restaurant">TODO</a></li>
-							<li><a href="/tht/account/register/user">Register Now</a>
+							<li><a>Register Now</a>
 								<ul>
 									<li><a href="/tht/account/register/user" class="first">I'm Customer</a></li>
 									<li><a href="/tht/account/register/restaurant">I'm Restaurant</a></li>
@@ -34,14 +34,30 @@
 				    value="${_csrf.token}"/>
 								</form>
 								<c:if test="${(user == null)&&(restaurant == null)}">
-									<a href="/tht/welcome_login">Login</a>
+									<a href="/tht/welcome_login">Signin</a>
 								</c:if>
 								<c:if test="${user != null}">
 					       			<a href="/tht/home">${user.name}</a>
 									<a href="/tht/cart">Cart</a>
+									
+								<form id="signout_form" action="<c:url value="/j_spring_security_logout"/>" method="POST">
+									<input type="hidden"
+								    name="${_csrf.parameterName}"
+								    value="${_csrf.token}"/>
+								</form>
+									
+									<a href="javascript:document:signout_form.submit();">Signout</a>
+<!-- 									<a href="/j_spring_security_logout">Signout</a> -->
 								</c:if>
 								<c:if test="${restaurant != null}">
 					       			<a href="/tht/home">${restaurant.name}</a>
+					       			<form id="signout_form_r" action="<c:url value="/j_spring_security_logout"/>" method="POST">
+										<input type="hidden"
+									    name="${_csrf.parameterName}"
+									    value="${_csrf.token}"/>
+									</form>
+									
+									<a href="javascript:document:signout_form_r.submit();">Signout</a>
 								</c:if>
 							</div>
 					</div>

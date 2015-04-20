@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.embio.tht.beans.*;
 import com.embio.tht.common.DaoPool;
@@ -21,87 +22,107 @@ import com.embio.tht.common.DaoPool;
 @RequestMapping(value = "/account")
 public class AccountController {
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/login/user", method=RequestMethod.GET)
-	public String getUserLoginForm(
-			@RequestParam(value="go_to_welcome", required = false) Integer _go_to_welcome,
-			Model model) {
-		
-		model.addAttribute("role", "user");
-		
-		if(_go_to_welcome != null)
-			model.addAttribute("go_to_welcome", _go_to_welcome);
-		
-		return "view_login";
-	}
-
-	@RequestMapping(value = "/login/restaurant", method=RequestMethod.GET)
-	public String getRestaurantLoginForm(
-			@RequestParam(value="go_to_welcome", required = false) Integer _go_to_welcome,
-			Model model) {
-		model.addAttribute("role", "restaurant");
-		
-		if(_go_to_welcome != null)
-			model.addAttribute("go_to_welcome", _go_to_welcome);
-		
-		return "view_login";
+//	/**
+//	 * Simply selects the home view to render by returning its name.
+//	 */
+//	@RequestMapping(value = "/login/user", method=RequestMethod.GET)
+//	public String getUserLoginForm(
+//			@RequestParam(value="go_to_welcome", required = false) Integer _go_to_welcome,
+//			Model model) {
+//		
+//		model.addAttribute("role", "user");
+//		
+//		if(_go_to_welcome != null)
+//			model.addAttribute("go_to_welcome", _go_to_welcome);
+//		
+//		return "view_login";
+//	}
+//
+//	@RequestMapping(value = "/login/restaurant", method=RequestMethod.GET)
+//	public String getRestaurantLoginForm(
+//			@RequestParam(value="go_to_welcome", required = false) Integer _go_to_welcome,
+//			Model model) {
+//		model.addAttribute("role", "restaurant");
+//		
+//		if(_go_to_welcome != null)
+//			model.addAttribute("go_to_welcome", _go_to_welcome);
+//		
+//		return "view_login";
+//	}
+//	
+//	@RequestMapping(value = "/login/user", method = RequestMethod.POST)
+//	public String userlogin(
+//			@RequestParam(value="go_to_welcome", required = false) Integer _go_to_welcome,
+//			String username,
+//			String password) {
+//		
+//		Users search = new Users();
+//		search.setUserName(username);
+//		search.setPassword(password);
+//		Users ai = DaoPool.getUsersDao().findFirstByExample(search);
+//		if(ai == null)
+//		{
+//			return "redirect:/account/login/user";
+//		}
+//		ai.setIsLoggedIn(1);
+//		DaoPool.getUsersDao().attachDirty(ai);
+//		
+//		Customer search1 = new Customer();
+//		search1.setAccountId(ai.getId());
+//		Customer ui = DaoPool.getCustomerDao().findFirstByExample(search1);
+//		
+//		if(_go_to_welcome == null)
+//			return "redirect:/user?userid=" + ui.getId();
+//		else
+//			return "redirect:/welcome?userid="+ui.getId();
+//	}
+//	
+//	@RequestMapping(value = "/login/restaurant", method = RequestMethod.POST)
+//	public String restaurantlogin(
+//			@RequestParam(value="go_to_welcome", required = false) Integer _go_to_welcome,
+//			String username,
+//			String password) {
+//		
+//		Users search = new Users();
+//		search.setUserName(username);
+//		search.setPassword(password);
+//		Users ai = DaoPool.getUsersDao().findFirstByExample(search);
+//		if(ai == null)
+//		{
+//			return "redirect:/account/login/restaurant";
+//		}
+//		ai.setIsLoggedIn(1);
+//		DaoPool.getUsersDao().attachDirty(ai);
+//		
+//		Restaurant search1 = new Restaurant();
+//		search1.setAccountId(ai.getId());
+//		Restaurant r = DaoPool.getRestaurantDao().findFirstByExample(search1);
+//		
+//		if(_go_to_welcome == null)
+//			return "redirect:/restaurant?restaurantid="+r.getId();
+//		else
+//			return "redirect:/welcome";
+//	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(
+		@RequestParam(value = "error", required = false) String error,
+		@RequestParam(value = "logout", required = false) String logout) {
+ 
+		ModelAndView model = new ModelAndView();
+		if (error != null) {
+			model.addObject("error", "Invalid username and password!");
+		}
+ 
+		if (logout != null) {
+			model.addObject("msg", "You've been logged out successfully.");
+		}
+		model.setViewName("view_login");
+ 
+		return model;
+ 
 	}
 	
-	@RequestMapping(value = "/login/user", method = RequestMethod.POST)
-	public String userlogin(
-			@RequestParam(value="go_to_welcome", required = false) Integer _go_to_welcome,
-			String username,
-			String password) {
-		
-		Users search = new Users();
-		search.setUserName(username);
-		search.setPassword(password);
-		Users ai = DaoPool.getUsersDao().findFirstByExample(search);
-		if(ai == null)
-		{
-			return "redirect:/account/login/user";
-		}
-		ai.setIsLoggedIn(1);
-		DaoPool.getUsersDao().attachDirty(ai);
-		
-		Customer search1 = new Customer();
-		search1.setAccountId(ai.getId());
-		Customer ui = DaoPool.getCustomerDao().findFirstByExample(search1);
-		
-		if(_go_to_welcome == null)
-			return "redirect:/user?userid=" + ui.getId();
-		else
-			return "redirect:/welcome?userid="+ui.getId();
-	}
-	
-	@RequestMapping(value = "/login/restaurant", method = RequestMethod.POST)
-	public String restaurantlogin(
-			@RequestParam(value="go_to_welcome", required = false) Integer _go_to_welcome,
-			String username,
-			String password) {
-		
-		Users search = new Users();
-		search.setUserName(username);
-		search.setPassword(password);
-		Users ai = DaoPool.getUsersDao().findFirstByExample(search);
-		if(ai == null)
-		{
-			return "redirect:/account/login/restaurant";
-		}
-		ai.setIsLoggedIn(1);
-		DaoPool.getUsersDao().attachDirty(ai);
-		
-		Restaurant search1 = new Restaurant();
-		search1.setAccountId(ai.getId());
-		Restaurant r = DaoPool.getRestaurantDao().findFirstByExample(search1);
-		
-		if(_go_to_welcome == null)
-			return "redirect:/restaurant?restaurantid="+r.getId();
-		else
-			return "redirect:/welcome";
-	}
 	
 	@RequestMapping(value = "/register/user", method = RequestMethod.GET)
 	public String getUserRegisterForm(Model model) {

@@ -117,7 +117,7 @@ public class OrderItem implements java.io.Serializable {
 		
 		if(consumeDay.getYear() == today.getYear() &&
 			consumeDay.getMonth() == today.getMonth() &&
-			consumeDay.getDay() == today.getDay())
+			consumeDay.getDate() == today.getDate())
 			return true;
 		else
 			return false;

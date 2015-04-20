@@ -27,7 +27,7 @@ public class TrackUnitModel {
 	public boolean isSameDate(Date date){
 		if(this.date.getYear() == date.getYear() &&
 			this.date.getMonth() == date.getMonth() &&
-			this.date.getDay() == date.getDay())
+			this.date.getDate() == date.getDate())
 			return true;
 		return false;
 	}

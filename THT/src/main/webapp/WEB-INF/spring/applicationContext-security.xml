@@ -20,27 +20,32 @@
 <!-- 		<intercept-url pattern="/customer/**" access="isAuthenticated()" /> -->
 <!-- 		<intercept-url pattern="/welcome_login/**" access="isAuthenticated()" /> -->
 		
-<!-- 		<intercept-url pattern="/cart/**" access="isAuthenticated()" /> -->
+		<intercept-url pattern="/cart/**" access="isAuthenticated()" />
 <!-- 		<intercept-url pattern="/cart/add" access="isAuthenticated()" /> -->
-<!-- 		<intercept-url pattern="/dish/**" access="isAuthenticated()" /> -->
+		<intercept-url pattern="/dish/**" access="isAuthenticated()" />
 <!-- 		<intercept-url pattern="/dish/view/**" access="isAuthenticated()" /> -->
 <!-- 		<intercept-url pattern="/dish/add/**" access="isAuthenticated()" /> -->
-<!-- 		<intercept-url pattern="/form_dish_add_step2/**" access="isAuthenticated()" /> -->
-<!-- 		<intercept-url pattern="/health/view/**" access="isAuthenticated()" /> -->
-<!-- 		<intercept-url pattern="/home/**" access="isAuthenticated()" /> -->
-<!-- 		<intercept-url pattern="/order/**" access="isAuthenticated()" /> -->
+		<intercept-url pattern="/form_dish_add_step2/**" access="isAuthenticated()" />
+		<intercept-url pattern="/health/view/**" access="isAuthenticated()" />
+		<intercept-url pattern="/home/**" access="isAuthenticated()" />
+		<intercept-url pattern="/order/**" access="isAuthenticated()" />
 <!-- 		<intercept-url pattern="/order/view/**" access="isAuthenticated()" /> -->
-<!-- 		<intercept-url pattern="/payment/**" access="isAuthenticated()" /> -->
+		<intercept-url pattern="/payment/**" access="isAuthenticated()" />
 <!-- 		<intercept-url pattern="/profile/view/**" access="isAuthenticated()" /> -->
-<!-- 		<intercept-url pattern="/profile/**" access="isAuthenticated()" /> -->
+		<intercept-url pattern="/profile/**" access="isAuthenticated()" />
 <!-- 		<intercept-url pattern="/search/**" access="isAuthenticated()" /> -->
-<!-- 		<intercept-url pattern="/welcome_login/**" access="isAuthenticated()" /> -->
+		<intercept-url pattern="/welcome_login/**" access="isAuthenticated()" />
+<!-- 		<intercept-url pattern="/welcome" access="isAuthenticated()" /> -->
+		
+		
+		
+<!-- 			<intercept-url pattern="/**" access="isAuthenticated()" />   -->
 
-			<intercept-url pattern="/**" access="isAuthenticated()" />  
-			<intercept-url pattern="/**/**" access="isAuthenticated()" />  
-			<intercept-url pattern="/**/**/**" access="isAuthenticated()" />  
-			<intercept-url pattern="/**/**/**/**" access="isAuthenticated()" /> 
-<!-- 			<intercept-url pattern="/" access="none" />  -->
+<!-- 			<intercept-url pattern="/" access="none" /> -->
+<!-- 			<intercept-url pattern="/welcome" access="none" /> -->
+			
+			
+			 
 <!-- 			<intercept-url pattern="/welcome*" access="none" />   -->
 <!-- 			<intercept-url pattern="*.jpg" access="none" />   -->
 <!-- 			<intercept-url pattern="*.css" access="none" />   -->
@@ -48,8 +53,19 @@
 <!-- 			<intercept-url pattern="*.png" access="none" />  -->
 <!-- 			<intercept-url pattern="*.gif" access="none" />   -->
 
-		<!-- <form-login /> -->
-		<!-- <logout /> -->
+<!-- 		<form-login login-page="/view_login.jsp"    -->
+<!--             authentication-failure-url="/view_login.jsp?error=true"    -->
+<!--             default-target-url="/" /> -->
+          <form-login 
+			login-page="/account/login" 
+		    default-target-url="/" 
+			authentication-failure-url="/account/login?error" 
+			username-parameter="username"
+			password-parameter="password" 
+			login-processing-url="/j_spring_security_check"/>
+		
+		<logout logout-success-url="/" logout-url="/j_spring_security_logout" />
+
 	</http>
 	
 	<jdbc-user-service id="userService1"

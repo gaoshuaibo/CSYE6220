@@ -26,10 +26,21 @@ public class TraceModel {
 		TrackUnitModel unit = findDate(date);
 		if(unit == null){
 			unit = new TrackUnitModel(date, calorie);
-			items.add(unit);
+			addByDate(unit);
 		}else{
 			unit.addCalorie(calorie);			
 		}
 		return unit;
+	}
+	
+	private void addByDate(TrackUnitModel model){
+		int index = 0;
+		if(items.size() != 0){
+			for(;index<items.size();index++){
+				if(items.get(index).getDate().after(model.getDate()))
+					break;
+			}
+		}
+		items.add(index, model);
 	}
 }

@@ -24,13 +24,13 @@ import com.embio.tht.common.TicketGenerater;
 @RequestMapping("/form_dish_add_step2")
 public class FileUploadController {
 
-	@ModelAttribute
-	public void ajaxAttribute(WebRequest request, Model model) {
-		model.addAttribute("ajaxRequest", AjaxUtils.isAjaxRequest(request));
-	}
+//	@ModelAttribute
+//	public void ajaxAttribute(WebRequest request, Model model) {
+//		model.addAttribute("ajaxRequest", AjaxUtils.isAjaxRequest(request));
+//	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	public void processUpload(
+	public String processUpload(
 			@RequestParam MultipartFile image,
 			Model model,
 			String dishname,
@@ -52,6 +52,8 @@ public class FileUploadController {
 		model.addAttribute("dishprice", dishprice);
 		model.addAttribute("message", "Image '" + image.getOriginalFilename() + "' uploaded successfully");
 		model.addAttribute("dishimage", image_name);
+		
+		return "form_dish_add_step2";
 	}
 	
 }

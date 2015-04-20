@@ -28,7 +28,6 @@ public final class HealthEngine {
 				trace.add(item.getConsumeDate(), item.getComsumedCalorie());
 			}
 		}
-		
 		return trace;
 	}
 	

@@ -3,17 +3,17 @@
 <html>
 <head>
 
-	<!-- 	am crying now! -->
-    <meta name="_csrf" content="${_csrf.token}"/>
-    <!-- default header name is X-CSRF-TOKEN -->
-    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+<!-- 	<!-- 	am crying now! --> -->
+<%--     <meta name="_csrf" content="${_csrf.token}"/> --%>
+<!--     default header name is X-CSRF-TOKEN -->
+<%--     <meta name="_csrf_header" content="${_csrf.headerName}"/> --%>
     
 <title>The Healthy Table - Home</title>
 <link rel="stylesheet" href="/tht/resources/blueprint/screen.css" type="text/css" media="screen, projection">
 <link rel="stylesheet" href="/tht/resources/blueprint/print.css" type="text/css" media="print">
 <link href="<c:url value="/resources/style/form.css" />" rel="stylesheet"  type="text/css" />		
-<script type="text/javascript" src="<c:url value="/resources/jquery/1.6/jquery.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/jqueryform/2.8/jquery.form.js" />"></script>	
+<%-- <script type="text/javascript" src="<c:url value="/resources/jquery/1.6/jquery.js" />"></script> --%>
+<%-- <script type="text/javascript" src="<c:url value="/resources/jqueryform/2.8/jquery.form.js" />"></script>	 --%>
 <link href="<c:url value="/resources/style/nav_bar.css" />" rel="stylesheet"  type="text/css" />
 <link href="<c:url value="/resources/style/utl.css" />" rel="stylesheet"  type="text/css" />
 <script type="text/javascript" src="<c:url value="/resources/scripts/nav_bar.js" />"></script>
@@ -28,7 +28,7 @@
 			  	<h2>Step 2: Upload Image</h2>
 			  	
 			  	<c:if test="${dishimage == null}">
-			  		<form id="fileuploadForm" action="/tht/form_dish_add_step2" method="POST" enctype="multipart/form-data">
+			  		<form id="fileuploadForm" action="/tht/form_dish_add_step2?${_csrf.parameterName}=${_csrf.token}" method="POST" enctype="multipart/form-data">
 						<c:if test="${not empty message}">
 							<div id="message" class="success">${message}</div>	  		
 				  		</c:if>
@@ -38,25 +38,11 @@
 						
 						<label for="image">Image:</label>
 						<input type="file" name="image" id="image"><br>
-						<input type="hidden"
-							    name="${_csrf.parameterName}"
-							    value="${_csrf.token}"/>
+<!-- 						<input type="hidden" -->
+<%-- 							    name="${_csrf.parameterName}" --%>
+<%-- 							    value="${_csrf.token}"/> --%>
 						<input type="submit" value="Upload">
 					</form>
-					<script type="text/javascript">
-						    var token = $("meta[name='_csrf']").attr("content");
-						    var header = $("meta[name='_csrf_header']").attr("content");
-						    $(document).ajaxSend(function(e, xhr, options) {
-						        xhr.setRequestHeader(header, token);
-						    });
-						$(document).ready(function() {
-							$('<input type="hidden" name="ajaxUpload" value="true" />').insertAfter($("#image"));
-							$("#fileuploadForm").ajaxForm({ success: function(html) {
-									$("#page_1").replaceWith(html);
-								}
-							});
-						});
-					</script>
 				</c:if>
 				
 				<c:if test="${dishimage != null}">
@@ -73,7 +59,5 @@
 				</c:if>
 		</div>
 	</div>
-<c:if test="${!ajaxRequest}">
 </body>
 </html>
-</c:if>
