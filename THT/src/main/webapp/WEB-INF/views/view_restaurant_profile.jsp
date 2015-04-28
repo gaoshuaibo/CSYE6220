@@ -13,9 +13,11 @@
 	<div id="page_1">
 		<%@ include file="nav_bar.jsp"%>
 		<div id="content_1">
-			Name: ${restaurant.name}<br>
-			Location: ${restaurant.location.name}<br>
-			Address: ${restaurant.address}<br>
+			<div style="font-size: 18px;">
+				Name: ${restaurant.name}<br>
+				Location: ${restaurant.location.name}<br>
+				Address: ${restaurant.address}<br>
+			</div>
 		</div>
 	</div>
 </body>

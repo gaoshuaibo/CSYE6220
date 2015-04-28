@@ -4,7 +4,7 @@
 <head>
 <title>The Healthy Table - Home</title>
 </head>
-<body">
+<body>
 <h2>You have been logged out successfully.</h2>
 </body>
 </html>

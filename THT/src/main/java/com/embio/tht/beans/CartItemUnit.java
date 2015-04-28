@@ -77,4 +77,8 @@ public class CartItemUnit implements java.io.Serializable {
 	public void setUserInfoId(int userInfoId) {
 		this.userInfoId = userInfoId;
 	}
+	
+	public Integer getCalorie(){
+		return this.dish.getCalorie()*this.quantity;
+	}
 }

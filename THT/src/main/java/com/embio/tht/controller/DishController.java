@@ -37,17 +37,20 @@ public class DishController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value="/view/user", method = RequestMethod.GET)
+	@RequestMapping(value="/viewdetails", method = RequestMethod.GET)
 	public String userViewDish(
 			@RequestParam(value="dishid") Integer _dishid,
 			Model model) {
 		Customer customer = ModelFactory.getCurrentCustomer();
-		model.addAttribute("user",customer);
+		model.addAttribute("customer",customer);
+		Restaurant restaurant = ModelFactory.getCurrentRestaurant();
+		model.addAttribute("restaurant",restaurant);
+		
 		
 		Dish dish = ModelFactory.getDish(_dishid);
 		model.addAttribute("dish", dish);
 		
-		return "view_user_dish";
+		return "view_dish";
 	}
 	
 	@RequestMapping(value="/view/restaurant", method = RequestMethod.GET)

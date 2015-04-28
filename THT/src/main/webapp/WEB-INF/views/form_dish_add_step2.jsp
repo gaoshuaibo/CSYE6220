@@ -21,7 +21,7 @@
 <body onload="setSearchBoxWidth();" onresize="setSearchBoxWidth();">
 	<div id="page_1">
 		<%@ include file="nav_bar.jsp"%>
-		<div id="content_1">
+		<div id="content_1" class="span-12 last">
 			  <script type="text/javascript">
 			  	setSearchBoxWidth();
 			  </script>
@@ -32,12 +32,15 @@
 						<c:if test="${not empty message}">
 							<div id="message" class="success">${message}</div>	  		
 				  		</c:if>
-						<input type="hidden" name="dishname" value="${dishname}"><br>
-						<input type="hidden" name="dishprice" value="${dishprice}"><br>
-						
-						
-						<label for="image">Image:</label>
-						<input type="file" name="image" id="image"><br>
+				  		<fieldset>
+				  		<legend>Image</legend>
+							<input type="hidden" name="dishname" value="${dishname}"><br>
+							<input type="hidden" name="dishprice" value="${dishprice}"><br>
+							
+							
+							<label for="image">Image:</label>
+							<input type="file" name="image" id="image"><br>
+						</fieldset>
 <!-- 						<input type="hidden" -->
 <%-- 							    name="${_csrf.parameterName}" --%>
 <%-- 							    value="${_csrf.token}"/> --%>

@@ -2,9 +2,30 @@
 
 #content_1{
 	margin: 0 auto;
-	width: 1300px;
+	width: 1600px;
 }
 
 #show_dish_panel{
 	width: auto;
+}
+
+#p_calorie{
+	color: red;
+}
+
+#a_dish {
+	text-decoration: none;
+	font-size: 15px;
+}
+
+#p_view_dish{
+	font-size: 20px;
+}
+
+#div_home{
+	font-size: 18px;
+}
+
+#show_dish_panel{
+	font-size: 18px;
 }

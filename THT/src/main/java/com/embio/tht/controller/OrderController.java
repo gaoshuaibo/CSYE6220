@@ -55,7 +55,13 @@ public class OrderController {
 			}
 		}
 
+		int total_calorie = 0;
+		for(OrderInfo order:orders){
+			total_calorie += order.getComsumedCalorie() + order.getUncomsumedCalorie();
+		}
+		
 		model.addAttribute("orders", orders);
+		model.addAttribute("total_calorie", total_calorie);
 		
 		return "view_user_order";
 	}

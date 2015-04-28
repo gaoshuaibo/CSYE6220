@@ -46,11 +46,13 @@
 	<div id="page_1">
 		<%@ include file="nav_bar.jsp"%>
 		<div id="content_1">
-			Total Consumed Calorie: ${healthReport.totalConsumedCalorie}<br>
-			Total Unconsumed Calorie: ${healthReport.totalUncomsumedCalorie}<br>
-			Today Consumed Calorie: ${healthReport.todayConsumedCalorie}<br>
+			<div style="font-size: 18px; color: red; margin-top: 20px; margin-bottom: 20px;">
+				Total Consumed Calorie: ${healthReport.totalConsumedCalorie}<br>
+				Total Unconsumed Calorie: ${healthReport.totalUncomsumedCalorie}<br>
+				Today Consumed Calorie: ${healthReport.todayConsumedCalorie}<br>
+			</div>
 		</div>
-		<div id="curve_chart" style="width: 900px; height: 500px"></div>
+		<div id="curve_chart" style="width: 900px; height: 500px; margin-left: 300px;"></div>
 	</body>
 </html>
 

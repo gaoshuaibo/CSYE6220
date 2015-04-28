@@ -13,19 +13,31 @@
 	<div id="page_1">
 		<%@ include file="nav_bar.jsp"%>
 		<div id="content_1">
-			<ul>
-			<a href="/tht/dish/add">Add dish</a><br>
-			<c:forEach items="${dishes}" var="dish">
-			    <li>
-	 				<img height="200" width="200" alt="${dish.name}" src="/tht/resources/images/${dish.image}"><br>
-	 				Name: ${dish.name}<br>
-	 				Price: ${dish.price}<br>
-					<form action="/tht/dish/remove?dishid=${dish.id}" method="POST" name="dish_remove">
-						<input type="submit" value="Remove">
-					</form>
-				</li>
-			</c:forEach>
-			</ul>
+		<a href="/tht/dish/add"><h2>Add dish</h2></a><br>
+			<% int index = 0; %>
+			<table id="show_dish_panel">
+				<tbody>
+					<c:forEach items="${dishes}" var="dish">
+					    <% if(index == 0) out.println( "<tr>");%>
+					    <td>
+					    	<fieldset><legend>Dish: ${dish.name}</legend>
+				 				<img height="200" width="200" alt="${dish.name}" src="/tht/resources/images/${dish.image}"><br>
+				 				Price: ${dish.price}
+				 				<p style="color:red;">Calorie: ${dish.getCalorie()}</p>
+								<form action="/tht/dish/remove?dishid=${dish.id}" method="POST" name="dish_remove">
+									<input type="submit" value="Remove">
+								</form>
+							</fieldset>	
+					  	</td>
+					  	<% if(index == 5) {
+					  			out.println("</tr>");
+					  			index = 0;
+					  		}else{
+					  			index++;} %>
+					</c:forEach>
+				</tbody>
+			</table>
+			
 		</div>
 	</div>
 </body>

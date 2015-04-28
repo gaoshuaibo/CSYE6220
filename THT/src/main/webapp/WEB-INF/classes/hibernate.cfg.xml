@@ -31,5 +31,6 @@
 	<mapping resource="com/embio/tht/beans/Ticket.hbm.xml"/>
 	<mapping resource="com/embio/tht/beans/Customer.hbm.xml"/>
 	<mapping resource="com/embio/tht/beans/Restaurant.hbm.xml"/>
+	<mapping resource="com/embio/tht/beans/Authorities.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

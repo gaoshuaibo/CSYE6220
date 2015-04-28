@@ -33,7 +33,7 @@ public final class ModelFactory {
 	}
 	
 	public static Customer getCurrentCustomer(){
-		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser"))
+		if(!getCurrentRole().equals("ROLE_CUSTOMER"))
 			return null;
 		
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -49,7 +49,7 @@ public final class ModelFactory {
 	}
 	
 	public static Restaurant getCurrentRestaurant(){
-		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser"))
+		if(!getCurrentRole().equals("ROLE_RESTAURANT"))
 			return null;
 		
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

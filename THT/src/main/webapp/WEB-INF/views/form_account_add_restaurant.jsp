@@ -12,23 +12,26 @@
 <body onload="setSearchBoxWidth();" onresize="setSearchBoxWidth();">
 	<div id="page_1">
 		<%@ include file="nav_bar.jsp"%>
-		<div id="content_1">
+		<div id="content_1" class="span-12 last">
 			<form action="/tht/account/register/restaurant" method="POST">
-				<label for="name">Name:</label>
-				<input type="text" name="name"><br>
-				<label for="location">Location:</label>
-				<c:forEach items="${location_list}" var="location_item">
-					<input type="radio" name="locationid" value="${location_item.id}" checked="true">${location_item.name}
-				</c:forEach><br>
-				<label for="address">Address:</label>
-				<input type="text" name="address"><br>
-				<label for="email">Email:</label>
-				<input type="email" name="email"><br>
-				<label for="password">Password:</label>
-				<input type="password" name="password"><br>
-				<input type="hidden"
-				    name="${_csrf.parameterName}"
-				    value="${_csrf.token}"/>
+				<fieldset>
+				<legend>Register Form</legend>
+					<label for="name">Name:</label>
+					<input type="text" name="name"><br>
+					<label for="location">Location:</label>
+					<c:forEach items="${location_list}" var="location_item">
+						<input type="radio" name="locationid" value="${location_item.id}" checked="true">${location_item.name}
+					</c:forEach><br>
+					<label for="address">Address:</label>
+					<input type="text" name="address"><br>
+					<label for="email">Email:</label>
+					<input type="email" name="email"><br>
+					<label for="password">Password:</label>
+					<input type="password" name="password"><br>
+					<input type="hidden"
+					    name="${_csrf.parameterName}"
+					    value="${_csrf.token}"/>
+				</fieldset>
 				<input type="submit" value="Register">
 			</form>
 		</div>

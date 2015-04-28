@@ -1,4 +1,4 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 	<div class="main_head">
 		<header id="header_1">
@@ -12,8 +12,8 @@
 				<div class="middle">
 					<div class="up">
 						<ul>
-							<li><a href="/tht/home">My Home</a></li>
-							<li><a href="/tht/restaurant">TODO</a></li>
+							<li><a href="/tht/home">Your Account</a></li>
+<!-- 							<li><a href="/tht/restaurant">TODO</a></li> -->
 							<li><a>Register Now</a>
 								<ul>
 									<li><a href="/tht/account/register/user" class="first">I'm Customer</a></li>

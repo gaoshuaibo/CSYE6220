@@ -14,10 +14,10 @@
 		<%@ include file="nav_bar.jsp"%>
 		<div id="content_1">
 			<c:if test="${user != null}">
-				Register successfully: Welcome ${user.name}, your account is ${account.accountName}
+				Register successfully: Welcome ${user.name}, your account is ${account.userName}
 			</c:if>
 			<c:if test="${restaurant != null}">
-				Register successfully: Welcome ${restaurant.name}, your account is ${account.accountName}
+				Register successfully: Welcome ${restaurant.name}, your account is ${account.userName}
 			</c:if>
 		</div>
 	</div>

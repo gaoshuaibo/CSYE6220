@@ -13,24 +13,42 @@
 	<div id="page_1">
 		<%@ include file="nav_bar.jsp"%>
 		<div id="content_1">
-			<ul>
-			<c:forEach items="${cart_items}" var="item">
-			    <li>
-	 				<img height="100" width="100" alt="${item.dish.name}" src="/tht/resources/images/${item.dish.image}"><br>
-	 				Name: ${item.dish.name}<br>
-	 				Quantity: ${item.quantity}<br>
-					<form action="/tht/cart/remove?itemid=${item.id}" method="POST" name="cart_remove">
-						<input type="submit" value="Remove">
-										<input type="hidden"
-				    name="${_csrf.parameterName}"
-				    value="${_csrf.token}"/>
-					</form>
-				</li>
-			</c:forEach>
-			</ul>
+			<% int index = 0; %>
+			<h2 style="color:red;">Total Calorie:${total_calorie }</h2>
 			<form action="/tht/payment" method="GET">
 				<input type="submit" value="Place Order">
-			</form>
+			</form><br>
+			<table id="show_dish_panel">
+				<tbody>
+					<c:forEach items="${cart_items}" var="item">
+					    <% if(index == 0) out.println( "<tr>");%>
+					    <td>
+						    <fieldset>
+				 				<img height="200" width="200" alt="${item.dish.name}" src="/tht/resources/images/${item.dish.image}"><br>
+				 				Name: ${item.dish.name}<br>
+				 				Restaurant: ${item.restaurant.name}<br>
+				 				Calorie Unit: ${item.dish.getCalorie()}<br>
+				 				Quantity: ${item.quantity}<br>
+				 				<p style="color:red;">Calorie: ${item.getCalorie()}</p>
+								<form action="/tht/cart/remove?itemid=${item.id}" method="POST" name="cart_remove">
+									<input type="submit" value="Remove">
+													<input type="hidden"
+							    name="${_csrf.parameterName}"
+							    value="${_csrf.token}"/>
+								</form>
+							</fieldset>
+					  	</td>
+					  	<% if(index == 5) {
+					  			out.println("</tr>");
+					  			index = 0;
+					  		}else{
+					  			index++;} %>
+					</c:forEach>
+				</tbody>
+			</table>
+		
+
+
 		</div>
 	</div>
 </body>

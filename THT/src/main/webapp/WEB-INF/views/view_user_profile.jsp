@@ -13,11 +13,13 @@
 	<div id="page_1">
 		<%@ include file="nav_bar.jsp"%>
 		<div id="content_1">
-			Name: ${user.name}<br>
-			Gender: ${user.gender}<br>
-			Age: ${user.age}<br>
-			Location: ${user.location.name}<br>
-			Address: ${user.address}<br>
+			<div style="font-size: 18px;">
+				Name: ${user.name}<br>
+				Gender: ${user.gender}<br>
+				Age: ${user.age}<br>
+				Location: ${user.location.name}<br>
+				Address: ${user.address}<br>
+			</div>
 		</div>
 	</div>
 </body>

@@ -41,12 +41,19 @@ public class CartController {
 		ciu.setPlaced(0);
 		List<CartItemUnit> temps = DaoPool.getCartItemUnitDao().findByExample(ciu);
 		List<CartItemUnit> items = new ArrayList<CartItemUnit>();
-		
+
 		for(CartItemUnit temp:temps){
 			items.add(ModelFactory.getCartItemUnit(temp.getId()));
 		}
 		
+		int total_calorie = 0;
+		
+		for(CartItemUnit item:items){
+			total_calorie += item.getCalorie();
+		}
+		
 		model.addAttribute("cart_items", items );
+		model.addAttribute("total_calorie", total_calorie );
 		
 		return "view_user_cart";
 	}

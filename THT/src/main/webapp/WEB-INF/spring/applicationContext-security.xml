@@ -22,7 +22,9 @@
 		
 		<intercept-url pattern="/cart/**" access="isAuthenticated()" />
 <!-- 		<intercept-url pattern="/cart/add" access="isAuthenticated()" /> -->
-		<intercept-url pattern="/dish/**" access="isAuthenticated()" />
+		<intercept-url pattern="/dish/view/**" access="isAuthenticated()" />
+		<intercept-url pattern="/dish/remove/**" access="isAuthenticated()" />
+		<intercept-url pattern="/dish/add/**" access="isAuthenticated()" />
 <!-- 		<intercept-url pattern="/dish/view/**" access="isAuthenticated()" /> -->
 <!-- 		<intercept-url pattern="/dish/add/**" access="isAuthenticated()" /> -->
 		<intercept-url pattern="/form_dish_add_step2/**" access="isAuthenticated()" />

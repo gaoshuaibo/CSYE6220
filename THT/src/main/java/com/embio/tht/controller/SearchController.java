@@ -31,8 +31,15 @@ public class SearchController {
 	public String Search(
 			String keyword,
 			Model model) {
-		Customer customer = ModelFactory.getCurrentCustomer();
-		model.addAttribute("user",customer);
+		String role = ModelFactory.getCurrentRole();
+		
+		if(role.equals("ROLE_CUSTOMER")){
+			Customer customer = ModelFactory.getCurrentCustomer();
+			model.addAttribute("user",customer);}
+		else if(role.equals("ROLE_RESTAURANT")){
+			Restaurant restaurant = ModelFactory.getCurrentRestaurant();
+			model.addAttribute("restaurant",restaurant);
+		}
 		
 		List<Dish> result = SearchEngine.searchDish(keyword);
 		model.addAttribute("result",result);

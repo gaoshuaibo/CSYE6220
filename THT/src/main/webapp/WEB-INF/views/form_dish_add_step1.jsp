@@ -15,17 +15,21 @@
 <body onload="setSearchBoxWidth();" onresize="setSearchBoxWidth();">
 	<div id="page_1">
 		<%@ include file="nav_bar.jsp"%>
-		<div id="content_1">
+		<div id="content_1" class="span-12 last">
 			  <script type="text/javascript">
 			  	setSearchBoxWidth();
 			  </script>
 				<h2>Step 1: Base Infomation</h2>
 				<form action="/tht/dish/add/step1" method="POST">
-					<label for="name">Name:</label>
-					<input type="text" name="name"><br>
-					<label for="price">Price:</label>
-					<input type="number" name="price"><br>
+					<fieldset>
+					<legend>Dish Base Infomation</legend>
+						<label for="name">Name:</label>
+						<input type="text" name="name"><br>
+						<label for="price">Price:</label>
+						<input type="number" name="price"><br>
+					</fieldset>
 					<input type="submit" value="Next Step">
+					
 									<input type="hidden"
 				    name="${_csrf.parameterName}"
 				    value="${_csrf.token}"/>

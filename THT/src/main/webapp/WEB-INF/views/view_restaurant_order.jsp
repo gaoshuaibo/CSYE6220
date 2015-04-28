@@ -13,26 +13,38 @@
 	<div id="page_1">
 		<%@ include file="nav_bar.jsp"%>
 		<div id="content_1">
-			<ul>
-			<c:forEach items="${orderItems}" var="item">
-			    <li>
-		 			<img height="100" width="100" alt="${item.dish.name}" src="/tht/resources/images/${item.dish.image}"><br>
-		 			Name: ${item.dish.name}<br>
-		 			Quantity: ${item.quantity}<br>
-		 			Status: <c:if test="${item.used == 0}">Unused</c:if><c:if test="${item.used != 0}">Used (${item.consumeTime})</c:if>
-		 			<c:if test="${item.used == 0}">
-			 			<form action="/tht/order/consume?itemid=${item.id}" method="POST">
-				 			<label for="ticket">Confirm Ticket: </label>
-				 			<input type="text" name="code">
-				 			<input type="submit" value="Check">
-				 													<input type="hidden"
-				    name="${_csrf.parameterName}"
-				    value="${_csrf.token}"/>
-			 			</form>
-		 			</c:if>
-				</li>
-			</c:forEach>
-			</ul>
+			<% int index = 0; %>
+			<table id="show_dish_panel">
+				<tbody>
+					<c:forEach items="${orderItems}" var="item">
+					    <% if(index == 0) out.println( "<tr>");%>
+					    <td>
+					    	<fieldset>
+					 			<img height="200" width="200" alt="${item.dish.name}" src="/tht/resources/images/${item.dish.image}"><br>
+					 			Dish: ${item.dish.name}<br>
+					 			Quantity: ${item.quantity}<br>
+					 			Status: <c:if test="${item.used == 0}">Unused</c:if><c:if test="${item.used != 0}">Used<br> (${item.consumeTime})</c:if>
+					 			<c:if test="${item.used == 0}">
+						 			<form action="/tht/order/consume?itemid=${item.id}" method="POST">
+							 			<label for="ticket">Confirm Ticket: </label><br>
+							 			<input type="text" name="code">
+							 			<input type="submit" value="Check">
+							 													<input type="hidden"
+							    name="${_csrf.parameterName}"
+							    value="${_csrf.token}"/>
+						 			</form>
+					 			</c:if>
+					 		</fieldset>
+					  	</td>
+					  	<% if(index == 5) {
+					  			out.println("</tr>");
+					  			index = 0;
+					  		}else{
+					  			index++;} %>
+					</c:forEach>
+				</tbody>
+			</table>
+
 		</div>
 	</div>
 </body>
