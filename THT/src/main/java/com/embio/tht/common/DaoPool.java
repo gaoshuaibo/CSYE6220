@@ -1,6 +1,29 @@
 package com.embio.tht.common;
 
 import com.embio.tht.beans.*;
+import com.embio.tht.dao.AllergyHome;
+import com.embio.tht.dao.AuthoritiesHome;
+import com.embio.tht.dao.CalorieHome;
+import com.embio.tht.dao.CardsHome;
+import com.embio.tht.dao.CartItemHome;
+import com.embio.tht.dao.CartItemUnitHome;
+import com.embio.tht.dao.CustomerHome;
+import com.embio.tht.dao.DishIngredientItemHome;
+import com.embio.tht.dao.DishHome;
+import com.embio.tht.dao.EatingHabbitHome;
+import com.embio.tht.dao.FinanceItemHome;
+import com.embio.tht.dao.IngredientHome;
+import com.embio.tht.dao.LocationHome;
+import com.embio.tht.dao.OrderInfoHome;
+import com.embio.tht.dao.OrderItemDishHome;
+import com.embio.tht.dao.OrderItemHome;
+import com.embio.tht.dao.PaymentHome;
+import com.embio.tht.dao.RestaurantHome;
+import com.embio.tht.dao.RoleHome;
+import com.embio.tht.dao.SurveyHome;
+import com.embio.tht.dao.SystemInfoHome;
+import com.embio.tht.dao.TicketHome;
+import com.embio.tht.dao.UsersHome;
 
 public final class DaoPool {
 	private static UsersHome usersDao;

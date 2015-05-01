@@ -8,6 +8,16 @@
 <link href="<c:url value="/resources/style/nav_bar.css" />" rel="stylesheet"  type="text/css" />
 <link href="<c:url value="/resources/style/utl.css" />" rel="stylesheet"  type="text/css" />
 <script type="text/javascript" src="<c:url value="/resources/scripts/nav_bar.js" />"></script>
+
+<script src="<c:url value="/resources/jquery-2.1.3/jquery.js"/>"></script>
+<script src="<c:url value="/resources/ckeditor/ckeditor.js"/>"></script>
+<script src="<c:url value="/resources/ckeditor/adapters/jquery.js"/>"></script>
+<script type="text/javascript">
+	$(document).ready( function(){
+		$("textarea").ckeditor();
+	});
+</script>
+
 </head>
 <body onload="setSearchBoxWidth();" onresize="setSearchBoxWidth();">
 	<div id="page_1">
@@ -58,6 +68,30 @@
 					    name="${_csrf.parameterName}"
 					    value="${_csrf.token}"/>
 					<input type="submit" value="Add to Cart">
+				</form>
+			</c:if>
+
+			<table>
+				<tr>
+					<th>Reivews</th>
+				</tr>
+					<c:forEach items="${reviews}" var="aaa">
+						<tr>
+							<td>
+								<p>${aaa.getTrent()}</p>
+							</td>
+						</tr>
+					</c:forEach>
+			</table>
+
+			<c:if test="${customer != null}">
+				<form action="/tht/dish/review/add?dishid=${dish.id}" method="POST">
+					<label for="review_text">Write your own reviews</label><br/>
+					<textarea name="review_text"></textarea><br/>
+					<input type="hidden"
+					    name="${_csrf.parameterName}"
+					    value="${_csrf.token}"/>
+					<input type="submit" value="Submit Review">
 				</form>
 			</c:if>
 

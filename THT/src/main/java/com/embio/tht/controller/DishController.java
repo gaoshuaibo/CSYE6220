@@ -46,9 +46,13 @@ public class DishController {
 		Restaurant restaurant = ModelFactory.getCurrentRestaurant();
 		model.addAttribute("restaurant",restaurant);
 		
-		
 		Dish dish = ModelFactory.getDish(_dishid);
 		model.addAttribute("dish", dish);
+		
+		Survey search = new Survey();
+		search.setCustomerId(dish.getId());
+		List<Survey> reviews = DaoPool.getSurveyDao().findByExample(search);
+		model.addAttribute("reviews", reviews);
 		
 		return "view_dish";
 	}
@@ -161,5 +165,22 @@ public class DishController {
 		
 
 		return "redirect:/dish/view/restaurant";
+	}
+
+	@RequestMapping(value="/review/add", method = RequestMethod.POST)
+	public String addreview(
+			@RequestParam(value="dishid") Integer _dishid,
+			String review_text,
+			Model model) {
+
+		Survey survey = new Survey();
+		survey.setCustomerId(_dishid);
+		survey.setTrent(review_text);
+		survey.setBudgetMax(0);
+		survey.setBudgetMin(0);
+		
+		DaoPool.getSurveyDao().persist(survey);
+
+		return "redirect:/dish/viewdetails?dishid=" + _dishid;
 	}
 }
