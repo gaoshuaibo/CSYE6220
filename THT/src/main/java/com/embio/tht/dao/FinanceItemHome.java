@@ -15,6 +15,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 
 import com.embio.tht.beans.FinanceItem;
+import com.embio.tht.beans.Survey;
 
 /**
  * Home object for domain model class FinanceItem.
@@ -150,5 +151,9 @@ public class FinanceItemHome {
 			log.error("find one by example failed", re);
 			throw re;
 		}
+	}
+	public List getAll() {
+		FinanceItem all = new FinanceItem();
+		return findByExample(all);
 	}
 }

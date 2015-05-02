@@ -43,6 +43,10 @@ public class HomeController {
 			Restaurant restaurant = ModelFactory.getCurrentRestaurant();
 			model.addAttribute("restaurant",restaurant);
 			return "view_restaurant_home";}
+		else if(role.equals("ROLE_FINANCE")){
+			model.addAttribute("finance","Finance");
+			return "view_finance_home";
+		}
 		return "redirect:welcome_login";
 	}
 }

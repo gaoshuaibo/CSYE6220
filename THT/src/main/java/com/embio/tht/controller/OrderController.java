@@ -108,6 +108,20 @@ public class OrderController {
 			oitem.setUsed(0);
 			DaoPool.getOrderItemDao().persist(oitem);
 			
+			//set the dish object
+			Dish dish = DaoPool.getDishDao().findById(item.getDishId());
+			oitem.setDish(dish);
+			
+			//finance start
+			
+			FinanceItem fi = new FinanceItem();
+			fi.setIncome(oitem.getBalance());
+			fi.setOutcome(0.0);
+			fi.setOrderId(oinfo.getId());
+			DaoPool.getFinanceItemDao().persist(fi);
+			
+			//finance end
+			
 			Ticket ticket = new Ticket();
 			ticket.setOrderItemId(oitem.getId());
 			ticket.setCode(TicketGenerater.generateCode());
@@ -136,7 +150,22 @@ public class OrderController {
 		OrderItem oi = DaoPool.getOrderItemDao().findById(_itemid);
 		oi.setUsed(1);
 		oi.setConsumeTime((new Date()).toString());
-		DaoPool.getOrderItemDao().attachDirty(oi);		
+		DaoPool.getOrderItemDao().attachDirty(oi);	
+		
+		//set the dish object
+		Dish dish = DaoPool.getDishDao().findById(oi.getDishId());
+		oi.setDish(dish);
+		
+		
+		//finance start
+		
+		FinanceItem fi = new FinanceItem();
+		fi.setIncome(0.0);
+		fi.setOutcome(oi.getBalance()*0.8);
+		fi.setOrderId(oi.getOrderInfoId());
+		DaoPool.getFinanceItemDao().persist(fi);
+		
+		//finance end
 		
 		return "redirect:/order/view/restaurant";
 	}

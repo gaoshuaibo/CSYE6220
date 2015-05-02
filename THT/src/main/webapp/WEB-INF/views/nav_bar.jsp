@@ -33,7 +33,7 @@
 				    name="${_csrf.parameterName}"
 				    value="${_csrf.token}"/>
 								</form>
-								<c:if test="${(user == null)&&(restaurant == null)}">
+								<c:if test="${(user == null)&&(restaurant == null)&&(finance == null)}">
 									<a href="/tht/welcome_login">Signin</a>
 								</c:if>
 								<c:if test="${user != null}">
@@ -51,6 +51,16 @@
 								</c:if>
 								<c:if test="${restaurant != null}">
 					       			<a href="/tht/home">${restaurant.name}</a>
+					       			<form id="signout_form_r" action="<c:url value="/j_spring_security_logout"/>" method="POST">
+										<input type="hidden"
+									    name="${_csrf.parameterName}"
+									    value="${_csrf.token}"/>
+									</form>
+									
+									<a href="javascript:document:signout_form_r.submit();">Signout</a>
+								</c:if>
+								<c:if test="${finance != null}">
+					       			<a href="/tht/home">Finance</a>
 					       			<form id="signout_form_r" action="<c:url value="/j_spring_security_logout"/>" method="POST">
 										<input type="hidden"
 									    name="${_csrf.parameterName}"

@@ -30,6 +30,7 @@
 													<img style="margin-right: 20px;" height="200" width="200" alt="${item.dish.name}"
 														src="/tht/resources/images/${item.dish.image}"><br>
 													Dish: ${item.dish.name}<br> 
+													Price: ${item.dish.price}<br>	
 													Calorie Unit: ${item.dish.getCalorie()}<br>	
 													Quantity: ${item.quantity}<br>
 													Status:

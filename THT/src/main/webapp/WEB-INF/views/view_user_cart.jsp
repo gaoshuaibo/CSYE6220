@@ -27,6 +27,7 @@
 				 				<img height="200" width="200" alt="${item.dish.name}" src="/tht/resources/images/${item.dish.image}"><br>
 				 				Name: ${item.dish.name}<br>
 				 				Restaurant: ${item.restaurant.name}<br>
+				 				Price: ${item.dish.price}<br>
 				 				Calorie Unit: ${item.dish.getCalorie()}<br>
 				 				Quantity: ${item.quantity}<br>
 				 				<p style="color:red;">Calorie: ${item.getCalorie()}</p>

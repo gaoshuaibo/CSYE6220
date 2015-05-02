@@ -47,6 +47,9 @@ public class WelcomeController {
 			Restaurant restaurant = ModelFactory.getCurrentRestaurant();
 			model.addAttribute("restaurant",restaurant);
 		}
+		else if(role.equals("ROLE_FINANCE")){
+			model.addAttribute("finance","Finance");
+		}
 		
 		List<Dish> temps = DaoPool.getDishDao().getAll();
 		List<Dish> dishes = new ArrayList<Dish>();

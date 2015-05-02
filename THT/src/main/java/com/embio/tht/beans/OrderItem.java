@@ -126,4 +126,8 @@ public class OrderItem implements java.io.Serializable {
 	public Date getConsumeDate(){
 		return new Date(this.consumeTime);
 	}
+	
+	public double getBalance(){
+		return this.quantity * this.getDish().getPrice();
+	}
 }
