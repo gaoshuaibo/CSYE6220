@@ -104,19 +104,15 @@ public class AccountController {
 //			return "redirect:/welcome";
 //	}
 	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(
-		@RequestParam(value = "error", required = false) String error,
-		@RequestParam(value = "logout", required = false) String logout) {
+	public ModelAndView login(//Read Me! I have the copyright of this code!
+		@RequestParam(value = "error", required = false) String error) {
  
 		ModelAndView model = new ModelAndView();
-		if (error != null) {
-			model.addObject("error", "Invalid username and password!");
-		}
- 
-		if (logout != null) {
-			model.addObject("msg", "You've been logged out successfully.");
-		}
+		
+		if (error != null)	model.addObject("error", "Wrong Password!");
+		
 		model.setViewName("view_login");
  
 		return model;

@@ -8,7 +8,7 @@
   <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:orcl</property>
   <property name="hibernate.connection.username">oracle_user1</property>
   <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
-<!--   <property name="hibernate.tht_hibernate_session_factory">com.factory.HibernateSessionFactory</property>  -->
+  
 	<mapping resource="com/embio/tht/configueration/Users.hbm.xml"/>
 	<mapping resource="com/embio/tht/configueration/Allergy.hbm.xml"/>
 	<mapping resource="com/embio/tht/configueration/Calorie.hbm.xml"/>
